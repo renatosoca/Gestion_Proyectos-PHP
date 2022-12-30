@@ -1,0 +1,18 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.olvide {
+    .titulo {
+        @include m.textoDegradado(v.$azul);
+    }
+
+    .btn {
+        background-color: v.$azul;
+    }
+
+    .acciones {
+        a {
+            color: v.$azul;
+        }
+    }
+}

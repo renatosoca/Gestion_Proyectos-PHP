@@ -1,0 +1,18 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.login {
+    .titulo {
+        @include m.textoDegradado(v.$cyan);
+    }
+
+    .btn {
+        background-color: v.$cyan;
+    }
+
+    .acciones{
+        a {
+            color: v.$cyan;
+        }
+    }
+}

@@ -1,0 +1,18 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.recuperar {
+    .titulo {
+        @include m.textoDegradado(v.$rojo);
+    }
+
+    .btn {
+        background-color: v.$rojo;
+    }
+
+    .acciones {
+        a {
+            color: v.$rojo;
+        }
+    }
+}
