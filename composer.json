@@ -6,7 +6,11 @@
         "psr-4": {
             "MVC\\" : "./",
             "Controller\\" : "./controllers",
-            "Model\\" : "./models"
+            "Model\\" : "./models",
+            "Clases\\": "./classes"
         }
+    },
+    "require": {
+        "phpmailer/phpmailer": "^6.7"
     }
 }

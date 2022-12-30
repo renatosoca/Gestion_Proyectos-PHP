@@ -24,6 +24,19 @@ class Usuario extends ActiveRecord {
         $this->confirmado = $args['confirmado'] ?? '';
     }
 
+    public function validar() {
+        if (!$this->email) {
+            self::$alertas['error'][] = 'El email es obligatorio';
+        }
+        if (!$this->password) {
+            self::$alertas['error'][] = 'El password es obligatorio';
+        }
+        if (strlen( $this->password ) < 6 ) {
+            self::$alertas['error'][] = 'El password debe ser mayor a 6 caracteres';
+        }
+        return self::$alertas;
+    }
+
     public function validarNuevoUsuario( ) {
         if (!$this->nombre) {
             self::$alertas['error'][] = 'El nombre es obligatorio';
@@ -34,13 +47,42 @@ class Usuario extends ActiveRecord {
         if (!$this->password) {
             self::$alertas['error'][] = 'El password es obligatorio';
         }
-        if ($this->password < 6) {
+        if (strlen( $this->password ) < 6 ) {
             self::$alertas['error'][] = 'El password debe ser mayor a 6 caracteres';
         }
-        if (!$this->password !== $this->password2) {
+        if ($this->password !== $this->password2) {
             self::$alertas['error'][] = 'Los password son diferentes';
         }
 
         return self::$alertas;
+    }
+
+    public function validarEmail() {
+        if (!$this->email) {
+            self::$alertas['error'][] = 'El email es obligatorio';
+        }
+        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            self::$alertas['error'][] = 'Email no válido';
+        }
+
+        return self::$alertas;
+    }
+
+    public function validarPass() {
+        if (!$this->password) {
+            self::$alertas['error'][] = 'El password es obligatorio';
+        }
+        if (strlen( $this->password ) < 6 ) {
+            self::$alertas['error'][] = 'El password debe ser mayor a 6 caracteres';
+        }
+        return self::$alertas;
+    }
+
+    public function hashPassword() {
+        $this->password = password_hash($this->password, PASSWORD_BCRYPT);
+    }
+
+    public function generarToken() {
+        $this->token = uniqid();
     }
 }

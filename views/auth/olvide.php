@@ -5,9 +5,11 @@
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Recupera tu Password</p>
 
+        <?php include_once __DIR__.'/../template/alertas.php'; ?>
+
         <form action="/olvide" method="POST" class="formulario">
             <div class="campo">
-                <label for="email">Email:</label>
+                <label for="email">Email</label>
                 <input type="email" name="email" id="email" placeholder="Tu Email">
             </div>
             

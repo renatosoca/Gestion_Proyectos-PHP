@@ -5,7 +5,12 @@
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Coloca tu nuevo Password</p>
 
-        <form action="/recuperar" method="POST" class="formulario">
+        <?php 
+            include_once __DIR__.'/../template/alertas.php'; 
+            if ($mostrar) {
+        ?>
+
+        <form method="POST" class="formulario">
             <div class="campo">
                 <label for="password">Clave:</label>
                 <input type="password" name="password" id="password" placeholder="Tu Password">
@@ -13,6 +18,8 @@
             
             <input type="submit" value="Cambiar Password" class="btn">
         </form>
+
+        <?php } ?>
 
         <div class="acciones">
             <a href="/">Ya tienes una cuenta? Inicia Sesión</a>
