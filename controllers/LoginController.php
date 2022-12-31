@@ -36,7 +36,7 @@ class LoginController {
         }
 
         $router->render('auth/login', [
-            'titulo' => '| login',
+            'titulo' => 'login',
             'alertas' => $alertas
         ]);
     }
@@ -77,7 +77,7 @@ class LoginController {
 
         $alertas = Usuario::getAlertas();
         $router->render('auth/crear', [
-            'titulo' => '| Crear Cuenta',
+            'titulo' => 'Crear Cuenta',
             'usuario' => $usuario,
             'alertas' => $alertas
         ]);
@@ -110,7 +110,7 @@ class LoginController {
 
         $alertas = Usuario::getAlertas();
         $router->render('auth/olvide', [
-            'titulo' => '| Olvide',
+            'titulo' => 'Olvide',
             'alertas' => $alertas
         ]);
     }
@@ -141,7 +141,7 @@ class LoginController {
 
         $alertas = Usuario::getAlertas();
         $router->render('auth/recuperar', [
-            'titulo' => '| Recuperar Clave',
+            'titulo' => 'Recuperar Clave',
             'alertas' => $alertas,
             'mostrar' => $mostrar
         ]);
@@ -150,7 +150,7 @@ class LoginController {
     public static function mensaje( Router $router ) {
 
         $router->render('auth/mensaje', [
-
+            'titulo' => 'Mensaje'
         ]);
     }
 
@@ -174,7 +174,7 @@ class LoginController {
 
         $alertas = Usuario::getAlertas();
         $router->render('auth/confirmar', [
-            'titulo' => '| Confirmar Cuenta',
+            'titulo' => 'Confirmar Cuenta',
             'alertas' => $alertas
         ]);
     }
