@@ -33,7 +33,7 @@
 <?php include_once __DIR__.'/footer_dashboard.php'; ?>
 
 <?php 
-    $script .= "
+    $script = "
     <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
     <script src='/build/js/tareas.js'></script>
     "; 
