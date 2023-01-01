@@ -34,6 +34,10 @@ $router->post('/crear-proyecto', [DashboardController::class, 'crear_proyecto'])
 $router->get('/proyecto', [DashboardController::class, 'proyecto']);
 
 $router->get('/perfil', [DashboardController::class, 'perfil']);
+$router->post('/perfil', [DashboardController::class, 'perfil']);
+
+$router->get('/cambiar-clave', [DashboardController::class, 'cambiar_clave']);
+$router->post('/cambiar-clave', [DashboardController::class, 'cambiar_clave']);
 
 
 //API para las tareas

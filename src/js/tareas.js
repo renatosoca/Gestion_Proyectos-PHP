@@ -3,11 +3,29 @@
 
     obtenerTareas();
     let tareas = [];
+    let filtradas = [];
 
     const nuevaTarea = document.querySelector('#agregar-tarea');
     nuevaTarea.addEventListener('click', () => {
         mostrarFormulario();
     });
+
+    //Para los filtros
+    const filtros = document.querySelectorAll('#filtros input[type="radio"');
+    filtros.forEach( radio => {
+        radio.addEventListener('input', (e) => {
+            const filtro = e.target.value;
+
+            if (filtro === '') {
+                filtradas = [];
+                mostrarTareas();
+                return;
+            }
+
+            filtradas = tareas.filter( tarea => tarea.estado === filtro);
+            mostrarTareas();
+        })
+    })
 
     async function obtenerTareas() {
         try {
@@ -25,10 +43,14 @@
 
     function mostrarTareas() {
         limpiarTareas();
+        totalPendientes();
+        totalCompletas();
+
+        const arrayTareas = filtradas.length ? filtradas : tareas;
         
         const listaTareas = document.querySelector('#listado-tareas');
 
-        if (tareas.length === 0) {
+        if (arrayTareas.length === 0) {
             const textoNoTareas = document.createElement('li');
             textoNoTareas.textContent = 'No hay tareas';
             textoNoTareas.classList.add('no-tareas');
@@ -41,7 +63,7 @@
             '1': 'Completo'
         }
 
-        tareas.forEach(tarea => {
+        arrayTareas.forEach( tarea => {
             const {id, nombre, estado} = tarea;
 
             const contenedorTarea = document.createElement('li');
@@ -83,6 +105,30 @@
             
             listaTareas.appendChild(contenedorTarea);
         });
+    }
+
+    function totalPendientes() {
+        const totalPendientes = tareas.filter(tarea => tarea.estado === '0');
+        const PendientesRadio = document.querySelector('#pendiente');
+
+        if (totalPendientes.length === 0) {
+            PendientesRadio.disabled = true;
+            return;
+        }
+
+        PendientesRadio.disabled = false;
+    }
+
+    function totalCompletas() {
+        const totalCompletas = tareas.filter(tarea => tarea.estado === '1');
+        const completasRadio = document.querySelector('#completas');
+
+        if (totalCompletas.length === 0) {
+            completasRadio.disabled = true;
+            return;
+        }
+
+        completasRadio.disabled = false;
     }
 
     function mostrarFormulario(editar = false, tarea = {}) {
