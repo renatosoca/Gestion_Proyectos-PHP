@@ -8,6 +8,7 @@
 
     .principal {
         flex: 1;
+        overflow-y: scroll;
 
         .contenido {
             padding: 2rem;

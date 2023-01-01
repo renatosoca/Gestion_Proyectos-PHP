@@ -8,3 +8,63 @@
         margin: 0 auto;
     }
 }
+
+.listado-tareas {
+    list-style: none;
+    margin-top: 3rem;
+
+    .no-tareas {
+        text-align: center;
+    }
+
+    .tarea {
+        padding: .5rem 2rem;
+        border-bottom: .2rem solid darken(v.$grisClaro, 20%);
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &:last-of-type {
+            border: none;
+        }
+
+        p {
+            font-size: 1.7rem;
+
+        }
+
+        .opciones {
+            display: flex;
+            gap: 1.5rem;
+
+            button {
+                border: none;
+                font-size: 1rem;
+                padding: .8rem 1rem;
+                text-transform: uppercase;
+                font-weight: 700;
+                border-radius: 1rem;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &.completo {
+                    background-color: v.$azul;
+                    color: v.$blanco;
+                }
+
+                &.pendiente {
+                    background-color: v.$naranja;
+                    color: v.$blanco;
+                }
+
+                &.eliminar-tarea {
+                    background-color: v.$rojo;
+                    color: v.$blanco;
+                }
+            }
+        }
+    }
+}

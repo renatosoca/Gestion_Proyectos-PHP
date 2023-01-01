@@ -35,6 +35,7 @@ class LoginController {
             }
         }
 
+        $alertas = Usuario::getAlertas();
         $router->render('auth/login', [
             'titulo' => 'login',
             'alertas' => $alertas
