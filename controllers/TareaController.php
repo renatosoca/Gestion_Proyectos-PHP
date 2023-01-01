@@ -29,6 +29,7 @@ class TareaController {
                     'mensaje' => 'Hubo un error al agregar la tarea'
                 ];
                 echo json_encode($respuesta);
+                return;
             }
             
             $tarea = new Tarea($_POST);
@@ -45,14 +46,56 @@ class TareaController {
     }
 
     public static function actualizar() {
+        session_start();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            
+            $proyecto = Proyecto::where('url', $_POST['proyectoId']);
+            if (!$proyecto || $proyecto->usuarioId !== $_SESSION['id']) {
+                $respuesta = [
+                    'tipo' => 'error',
+                    'mensaje' => 'Hubo un error al actualizar la tarea'
+                ];
+                echo json_encode($respuesta);
+                return;
+            }
+            $tarea = new Tarea($_POST);
+            $tarea->proyectoId = $proyecto->id;
+            $resultado = $tarea->guardar();
+            $respuesta = [
+                'tipo' => 'exito',
+                'id' => $tarea->id,
+                'mensaje' => 'Actualizado Correctamente',
+                'proyectoId' => $proyecto->id
+            ];
+            echo json_encode($respuesta);
         }
     }
 
     public static function eliminar() {
+        session_start();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            
+            $proyecto = Proyecto::where('url', $_POST['proyectoId']);
+
+            if (!$proyecto || $proyecto->usuarioId !== $_SESSION['id']) {
+                $respuesta = [
+                    'tipo' => 'error',
+                    'mensaje' => 'Hubo un error al Eliminar la tarea'
+                ];
+                echo json_encode($respuesta);
+                return;
+            }
+
+            $tarea = new Tarea($_POST);
+            $tarea->proyectoId = $proyecto->id;
+            $resultado = $tarea->eliminar();
+            if ($resultado) {
+                $respuesta = [
+                    'tipo' => 'exito',
+                    'id' => $tarea->id,
+                    'mensaje' => 'Actualizado Correctamente',
+                    'proyectoId' => $proyecto->id
+                ];
+                echo json_encode($respuesta);
+            }
         }
     }
 }
