@@ -1,0 +1,19 @@
+services:
+  php:
+    image: znerox/php8.1-apache_mysqli:latest
+    container_name: projetify-php
+    ports:
+      - 4000:80
+    volumes:
+      - ./docker/www:/var/www/html
+
+  mysql:
+    image: mysql:8.0.33
+    container_name: projetify-db
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker/db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=development
+      - MYSQL_DATABASE=projetify

@@ -111,6 +111,13 @@ class Model {
 
     return array_shift($total);
   }
+
+  public static function belongsTo( string $column, string $value) {
+    $query = "SELECT * FROM " . static::$table . " WHERE {$column} = '{$value}'";
+    $result = self::PrepareSQL($query);
+    
+    return  $result ;
+  }
   
   public static function PrepareSQL( string $query ): array {
     $response = self::$database->prepare( $query );

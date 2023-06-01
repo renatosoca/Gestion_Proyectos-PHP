@@ -1,8 +1,0 @@
-@use 'base/variables' as v;
-@use 'base/mixins' as m;
-
-.mensaje {
-    .titulo {
-        @include m.textoDegradado(v.$naranja);
-    }
-}

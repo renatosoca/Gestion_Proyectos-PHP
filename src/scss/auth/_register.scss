@@ -1,18 +1,18 @@
 @use "base/variables" as v;
 @use "base/mixins" as m;
 
-.login {
+.register {
   .titulo {
-    @include m.textoDegradado(v.$cyan);
+    @include m.textoDegradado(v.$morado);
   }
 
   .btn {
-    background-color: v.$cyan;
+    background-color: v.$morado;
   }
 
   .acciones {
     a {
-      color: v.$cyan;
+      color: v.$morado;
     }
   }
 }

@@ -2,8 +2,8 @@
 namespace App\Models;
 
 class Project extends Model {
-  protected static $table = 'proyectos';
-  protected static $columnsDB = ['id', 'proyecto', 'url', 'usuarioId'];
+  protected static string $table = 'proyectos';
+  protected static array $columnsDB = ['id', 'proyecto', 'url', 'usuarioId'];
 
   public string $id;
   public string $proyecto;
@@ -11,7 +11,7 @@ class Project extends Model {
   public string $usuarioId;
 
   function __construct($args = []) {
-    $this->id = $args['id'] ?? null;
+    $this->id = $args['id'] ?? '';
     $this->proyecto = $args['nombre'] ?? '';
     $this->url = $args['url'] ?? '';
     $this->usuarioId = $args['usuarioId'] ?? '';

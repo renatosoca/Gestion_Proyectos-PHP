@@ -1,134 +1,77 @@
 <?php
-namespace Controller;
 
-use Model\Proyecto;
+namespace App\Controllers;
+
+use App\Models\Project;
+use App\Router;
 use Model\Usuario;
-use MVC\Router;
+use Model\Proyecto;
 
-class DashboardController {
+class ProjectController {
 
-    public static function index( Router $router) {
-        session_start();
-        isAuth();
+  public static function index() {
+    session_start();
+    //isAuth();
 
-        $proyectos = Proyecto::belongsTo('usuarioId', $_SESSION['id']);
+    //$proyectos = Proyecto::belongsTo('usuarioId', $_SESSION['id']);
+    $projects = Project::findAll('usuarioId', /*$_SESSION['userId']*/ 1);
 
-        $router->render('dashboard/index', [
-            'titulo' => 'Dashboard',
-            'proyectos' => $proyectos
-        ]);
-    }
+    Router::render('dashboard/index', 'ProjectLayout', [
+      'title' => 'Dashboard',
+      'projects' => $projects,
+      'name' => $_SESSION['name'] ?? '',
+      'lastname' => $_SESSION['lastname'] ?? '',
+    ]);
 
-    public static function crear_proyecto( Router $router) {
-        session_start();
-        isAuth();
-        $alertas = [];
+    exit;
+  }
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $proyecto = new Proyecto($_POST);
-            $alertas = $proyecto->validar();
+  public static function project( string $project = '') {
+    session_start();
+    isAuth();
+    $project = sanitize($project);
+    
+    $projectExist = Project::findOne('url', $project);
 
-            if (empty($alertas)) {
-                $proyecto->generarURL();
-                $proyecto->usuarioId = $_SESSION['id'];
-                
-                $resultado = $proyecto->guardar();
-                if ($resultado) {
-                    header('Location: /proyecto?id='.$proyecto->url);
-                }
-            }
+    if (!$projectExist) return Router::redirect('/dashboard');
+
+    if ($projectExist->user_id !== $_SESSION['id']) return Router::redirect('/dashboard');
+
+    Router::render('dashboard/project', 'ProjectLayout', [
+      'title' => $projectExist->proyecto,
+      'name' => $_SESSION['name'] ?? '',
+    ]);
+
+    exit;
+  }
+
+  public static function createProject() {
+    session_start();
+    isAuth();
+
+    $alerts = [];
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $project = new Project($_POST);
+      $alerts = $project->validar();
+
+      if (empty($alerts)) {
+        $project->generarURL();
+        $project->usuarioId = $_SESSION['userId'] ?? 1;
+        
+        $resultado = $project->save();
+        if ($resultado) {
+          header('Location: /project/'.$project->url);
         }
-
-        $router->render('dashboard/crear-proyecto', [
-            'titulo' => 'Crear Proyecto',
-            'alertas' => $alertas
-        ]);
+      }
     }
 
-    public static function proyecto( Router $router) {
-        session_start();
-        isAuth();
+    Router::render('dashboard/createProject', 'ProjectLayout', [
+      'title' => 'Crear Proyecto',
+      'alerts' => $alerts,
+      'name' => $_SESSION['name'] ?? '',
+    ]);
 
-        $token = s($_GET['token']);
-        if (!$token) header('Location: /dashboard');
-        $proyecto = Proyecto::where('url', $token);
-
-        if ($proyecto->usuarioId !== $_SESSION['id']) {
-            header('Location: /dashboard');
-        }
-
-        $router->render('dashboard/proyecto', [
-            'titulo' => $proyecto->proyecto
-        ]);
-    }
-
-    public static function perfil( Router $router ) {
-        session_start();
-        isAuth();
-        $alertas = [];
-        $usuario = Usuario::find($_SESSION['id']);
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $usuario->sincronizar($_POST);
-            $alertas = $usuario->validarUSuario();
-
-            if (empty( $alertas )) {
-                $existeUsuario = Usuario::where('email', $usuario->email);
-                if ($existeUsuario && $existeUsuario->id !== $usuario->id) {
-                    Usuario::setAlerta('error', 'El Email no está disponible');
-                } else {
-                    $resultado = $usuario->guardar();
-                    if ($resultado) {
-                        $_SESSION['nombre'] = $usuario->nombre;
-                        Usuario::setAlerta('exito', 'Actualizado correctamente');
-                    }
-                }
-            }
-        }
-
-        $alertas = Usuario::getAlertas();
-        $router->render('dashboard/perfil', [
-            'titulo' => 'Perfil',
-            'alertas' => $alertas,
-            'usuario' => $usuario
-        ]);
-    }
-
-    public static function cambiar_clave( Router $router ) {
-        session_start();
-        isAuth();
-        $alertas = [];
-        $usuario = Usuario::find($_SESSION['id']);
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $usuario->sincronizar($_POST);
-            $alertas = $usuario->validarPassNuevo();
-
-            if (empty( $alertas )) {
-                $resultado = $usuario->comprobarPassword();
-                if ($resultado) {
-                    $usuario->password = $usuario->password_nuevo;
-
-                    unset($usuario->password_actual);
-                    unset($usuario->password_nuevo);
-
-                    $usuario->hashPassword();
-                    $resultado = $usuario->guardar();
-                    
-                    if ($resultado) {
-                        Usuario::setAlerta('exito', 'Actualizado Correctamente');
-                    }
-                } else {
-                    Usuario::setAlerta('error', 'Password Incorrecto');
-                }
-            }
-        }
-
-        $alertas = Usuario::getAlertas();
-        $router->render('dashboard/cambiar_password', [
-            'titulo' => 'Cambiar Contraseña',
-            'alertas' => $alertas,
-            'usuario' => $usuario
-        ]);
-    }
+    exit;
+  }
 }

@@ -1,6 +1,6 @@
-@forward 'login';
-@forward 'crear';
-@forward 'olvide';
-@forward 'recuperar';
-@forward 'mensaje';
-@forward 'confirmar';
+@forward "login";
+@forward "register";
+@forward "forgot-password";
+@forward "reset-password";
+@forward "message";
+@forward "confirm-account";

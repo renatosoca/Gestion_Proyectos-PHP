@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-class Tasks extends Model {
+class Task extends Model {
 
   protected static $table = 'tareas';
   protected static $columnsDB = ['id', 'nombre', 'estado', 'proyectoId'];

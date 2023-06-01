@@ -3,13 +3,12 @@
 require_once __DIR__ . '/../app/main.php';
 
 use App\Router;
+use App\Controllers\AuthController;
+use App\Controllers\TaskController;
+use App\Controllers\ProjectController;
 
-use Controller\LoginController;
-use Controller\TareaController;
-use Controller\DashboardController;
-
-Router::get('/', [LoginController::class, 'login']);
-Router::post('/', [LoginController::class, 'login']);
+Router::get('/', [AuthController::class, 'AuthUser']);
+Router::post('/', [AuthController::class, 'AuthUser']);
 
 Router::get('/logout', function() {
   session_start();
@@ -17,37 +16,41 @@ Router::get('/logout', function() {
   Router::redirect('/');
 });
 
-Router::get('/crear', [LoginController::class, 'crear']);
-Router::post('/crear', [LoginController::class, 'crear']);
+Router::get('/register', [AuthController::class, 'createUser']);
+Router::post('/register', [AuthController::class, 'createUser']);
+Router::get('/confirm-account/:token', [AuthController::class, 'confirmAccount']);
 
-Router::get('/olvide', [LoginController::class, 'olvide']);
-Router::post('/olvide', [LoginController::class, 'olvide']);
+Router::get('/forgot-password', [AuthController::class, 'forgotPassword']);
+Router::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 
-Router::get('/recuperar', [LoginController::class, 'recuperar']);
-Router::post('/recuperar', [LoginController::class, 'recuperar']);
+Router::get('/reset-password/:token', [AuthController::class, 'reserPassword']);
+Router::post('/reset-password/:token', [AuthController::class, 'reserPassword']);
 
-Router::get('/mensaje', [LoginController::class, 'mensaje']);
-Router::get('/confirmar', [LoginController::class, 'confirmar']);
+Router::get('/message', function() {
+  Router::render('auth/message', 'AuthLayout', [
+    'title' => 'Mensaje'
+  ]);
+});
 
 
-Router::get('/dashboard', [DashboardController::class, 'index']);
+Router::get('/dashboard', [ProjectController::class, 'index']);
 
-Router::get('/crear-proyecto', [DashboardController::class, 'crear_proyecto']);
-Router::post('/crear-proyecto', [DashboardController::class, 'crear_proyecto']);
+Router::get('/create-project', [ProjectController::class, 'createProject']);
+Router::post('/create-project', [ProjectController::class, 'createProject']);
 
-Router::get('/proyecto', [DashboardController::class, 'proyecto']);
+Router::get('/project/:project', [ProjectController::class, 'project']);
 
-Router::get('/perfil', [DashboardController::class, 'perfil']);
-Router::post('/perfil', [DashboardController::class, 'perfil']);
+Router::get('/user/profile', [AuthController::class, 'profile']);
+Router::post('/user/profile', [AuthController::class, 'profile']);
 
-Router::get('/cambiar-clave', [DashboardController::class, 'cambiar_clave']);
-Router::post('/cambiar-clave', [DashboardController::class, 'cambiar_clave']);
+Router::get('/user/change-password', [AuthController::class, 'changePassword']);
+Router::post('/user/change-password', [AuthController::class, 'changePassword']);
 
 
 //API para las tareas
-Router::get('/api/tareas', [TareaController::class, 'index']);
-Router::post('/api/tarea', [TareaController::class, 'crear']);
-Router::post('/api/tarea/actualizar', [TareaController::class, 'actualizar']);
-Router::post('/api/tarea/eliminar', [TareaController::class, 'eliminar']);
+Router::get('/api/v1/tasks/:project', [TaskController::class, 'allTasks']);
+Router::post('/api/tarea', [TaskController::class, 'createTask']);
+Router::post('/api/tarea/actualizar', [TaskController::class, 'updateTask']);
+Router::post('/api/tarea/eliminar', [TaskController::class, 'deleteTask']);
 
 Router::dispatch();

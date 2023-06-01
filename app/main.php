@@ -4,7 +4,7 @@ use App\Models\Model;
 use Dotenv\Dotenv;
 
 require __DIR__.'/../database/config.php';
-require __DIR__.'/../helpers/helpers.php';
+require __DIR__.'/../helpers/generals.php';
 require __DIR__ .'/../vendor/autoload.php';
 
 $dotenv = Dotenv::createImmutable(__DIR__.'/../');
