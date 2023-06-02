@@ -1,24 +1,24 @@
-@use 'base/variables' as v;
-@use 'base/mixins' as m;
+@use "base/variables" as v;
+@use "base/mixins" as m;
 
 .formulario {
-    margin-top: 5rem;
+  margin-top: 3rem;
 
-    .campo {
-        display: flex;
-        align-items: center;
-        margin-bottom: 2rem;
+  .campo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
 
-        label {
-            flex: 0 0 10rem;
-            font-weight: bold;
-        }
-    
-        input {
-            flex: 1;
-            padding: 1rem;
-            border: none;
-            background-color: lighten(v.$gris, 40%);
-        }
+    label {
+      flex: 0 0 10rem;
+      font-weight: bold;
     }
+
+    input {
+      flex: 1;
+      padding: 1rem;
+      border: none;
+      background-color: lighten(v.$gris, 40%);
+    }
+  }
 }

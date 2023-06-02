@@ -4,6 +4,7 @@
 .register {
   .titulo {
     @include m.textoDegradado(v.$morado);
+    margin-bottom: 0%;
   }
 
   .btn {

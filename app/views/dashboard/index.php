@@ -1,6 +1,6 @@
 <?php if (count($projects) <= 0) : ?>
   <p class='no-proyectos'>No hay Proyectos Aún</p>
-  <a href="/crear-proyecto" class="btn">Crea Uno</a>
+  <a href="/create-project" class="btn">Crea Uno</a>
 <?php endif; ?>
 
 <?php if (count($projects) >= 0) : ?>

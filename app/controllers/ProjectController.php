@@ -13,8 +13,7 @@ class ProjectController {
     session_start();
     //isAuth();
 
-    //$proyectos = Proyecto::belongsTo('usuarioId', $_SESSION['id']);
-    $projects = Project::findAll('usuarioId', /*$_SESSION['userId']*/ 1);
+    $projects = Project::findAll('user_id', $_SESSION['userId']);
 
     Router::render('dashboard/index', 'ProjectLayout', [
       'title' => 'Dashboard',
@@ -57,12 +56,11 @@ class ProjectController {
 
       if (empty($alerts)) {
         $project->generarURL();
-        $project->usuarioId = $_SESSION['userId'] ?? 1;
+        $project->user_id = $_SESSION['userId'] ?? 1;
         
         $resultado = $project->save();
-        if ($resultado) {
-          header('Location: /project/'.$project->url);
-        }
+
+        if ($resultado) return Router::redirect('/project/'.$project->projectName);
       }
     }
 

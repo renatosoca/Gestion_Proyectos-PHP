@@ -7,15 +7,15 @@ class User extends Model {
     protected static array $columnsDB = ['id', 'name', 'lastname', 'email', 'password', 'hasVerifiedEmail', 'token'];
 
     public string $id;
-    public $name;
-    public $lastname;
-    public $email;
-    public $password;
-    public $password2;
-    public $password_actual;
-    public $password_nuevo;
-    public $token;
-    public $hasVerifiedEmail;
+    public string $name;
+    public string $lastname;
+    public string $email;
+    public string $password;
+    public string $confirmPassword;
+    /* public string $password_actual;
+    public string $password_nuevo; */
+    public string $token;
+    public bool $hasVerifiedEmail;
 
     function __construct($args = []) {
       $this->id = $args['id'] ?? '';
@@ -23,11 +23,11 @@ class User extends Model {
       $this->lastname = $args['lastname'] ?? '';
       $this->email = $args['email'] ?? '';
       $this->password = $args['password'] ?? '';
-      $this->password2 = $args['password2'] ?? '';
-      $this->password_actual = $args['password_actual'] ?? '';
-      $this->password_nuevo = $args['password_nuevo'] ?? '';
+      $this->confirmPassword = $args['confirmPassword'] ?? '';
+      /* $this->password_actual = $args['password_actual'] ?? '';
+      $this->password_nuevo = $args['password_nuevo'] ?? ''; */
       $this->token = $args['token'] ?? '';
-      $this->hasVerifiedEmail = $args['hasVerifiedEmail'] ?? '';
+      $this->hasVerifiedEmail = $args['hasVerifiedEmail'] ?? false;
     }
 
     public function userValidate() {
@@ -40,7 +40,7 @@ class User extends Model {
     }
 
     public function validateData(): array {
-      if ($this->password !== $this->password2) {
+      if ($this->password !== $this->confirmPassword) {
         self::$alerts['error'][] = 'Los password son diferentes';
       }
 
@@ -68,7 +68,7 @@ class User extends Model {
     }
 
     public function validarPassNuevo() {
-      if (!$this->password_actual) {
+      /* if (!$this->password_actual) {
         self::$alerts['error'][] = 'El password actual es obligatorio';
       }
       if (!$this->password_nuevo) {
@@ -76,7 +76,7 @@ class User extends Model {
       }
       if (strlen( $this->password_nuevo ) < 6 ) {
         self::$alerts['error'][] = 'El password debe ser mayor a 6 caracteres';
-      }
+      } */
       return self::$alerts;
     }
 

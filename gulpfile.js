@@ -24,7 +24,7 @@ const webpack = require("webpack-stream");
 const paths = {
   scss: "src/scss/**/*.scss",
   js: "src/js/**/*.js",
-  images: "src/img/**/*",
+  images: "src/images/**/*",
 };
 
 function css() {
@@ -73,7 +73,7 @@ function images() {
         })
       )
     )
-    .pipe(dest("public/build/img"));
+    .pipe(dest("public/build/images"));
 }
 
 function imagesWebp() {
@@ -83,7 +83,7 @@ function imagesWebp() {
         quality: 50,
       })
     )
-    .pipe(dest("public/build/img"));
+    .pipe(dest("public/build/images"));
 }
 
 function imagesAvif() {
@@ -93,7 +93,7 @@ function imagesAvif() {
         quality: 50,
       })
     )
-    .pipe(dest("public/build/img"));
+    .pipe(dest("public/build/images"));
 }
 
 function dev(done) {

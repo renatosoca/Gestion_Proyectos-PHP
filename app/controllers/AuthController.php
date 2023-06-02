@@ -9,6 +9,7 @@ use App\Utils\Email;
 class AuthController {
 
   public static function AuthUser() {
+    session_start();
     $alerts = [];
     $tempUser = new User();
 
@@ -63,19 +64,21 @@ class AuthController {
         $user->hashPassword();
         $user->generateToken();
 
-        /* $mail = new Email($user->email, $user->name, $user->lastname, $user->token);
+        $mail = new Email($user->email, $user->name, $user->lastname, $user->token);
         $response = $mail->SendMail(
           'register',
           'Registro de cuenta',
           'Confirmar cuenta',
           $_ENV['HOST'] . "/confirm-account/" . $user->token,
-        ); */
+        );
 
-        /* if ( $response ) {
+        debugging($response);
+
+        if ( $response ) {
           $user->save();
           
           Router::redirect('/message');
-        } */
+        }
 
         User::setAlert('error', 'Ha ocurrido un error al crear tu cuenta, por favor intenta nuevamente');
       }

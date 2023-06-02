@@ -1,5 +1,5 @@
 <div class="container register">
-  <h1 class="titulo">Tasks</h1>
+  <h1 class="titulo">Projetify</h1>
   <p class="tagline">Crea y administra tus proyectos</p>
 
   <div class="container-sm">
@@ -9,8 +9,13 @@
 
     <form action="/register" method="POST" class="formulario">
       <div class="campo">
-        <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" id="nombre" placeholder="Tu Nombre" value="<?php echo $user->nombre; ?>">
+        <label for="name">Nombre:</label>
+        <input type="text" name="name" id="name" placeholder="Tu name" value="<?php echo $user->name; ?>">
+      </div>
+      
+      <div class="campo">
+        <label for="lastname">Apellido:</label>
+        <input type="text" name="lastname" id="lastname" placeholder="Tu lastname" value="<?php echo $user->lastname; ?>">
       </div>
 
       <div class="campo">
@@ -24,8 +29,8 @@
       </div>
 
       <div class="campo">
-        <label for="password2">Confirmar contraseña:</label>
-        <input type="password" name="password2" id="password2" placeholder="Confirma tu Password">
+        <label for="confirmPassword">Confirmar contraseña:</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirma tu Password">
       </div>
       
       <input type="submit" value="Crear Cuenta" class="btn">
