@@ -16,7 +16,7 @@ luego se debe importar las tablas a la base de datos con el siguiente comando:
 docker exec -i mysql mysql -u root -p123456 < ./database.sql
 ```
 
-siguinte, se debe declarar las variables de entorno en el archivo .env, para esto se debe copiar el archivo .env.example y renombrarlo a .env, luego se debe modificar las siguientes variables:
+siguiente, se debe declarar las variables de entorno en el archivo .env, para esto se debe copiar el archivo .env.example y renombrarlo a .env, luego se debe modificar las siguientes variables:
 
 ```bash
 DB_HOST = localhost
@@ -44,7 +44,13 @@ y luego se debe instalar las dependencias de composer con el siguiente comando:
 composer update
 ```
 
-finalmente, se debe acceder a la carpeta public y ejecutar el siguiente comando:
+finalmente, se debe acceder a la carpeta public con el siguiente comando:
+
+```bash
+cd public
+```
+
+y ejecutar el siguiente comando:
 
 ```bash
 php -S localhost:3000
