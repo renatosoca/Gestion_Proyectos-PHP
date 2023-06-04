@@ -30,6 +30,7 @@ export const taskApp = async (element) => {
   renderModal(layout, async (taskObject) => {
     const newTaskObject = {
       ...taskObject,
+      id: "",
       projectId,
       status: "pending",
     };

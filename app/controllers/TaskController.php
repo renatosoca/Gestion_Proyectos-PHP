@@ -34,11 +34,10 @@ class TaskController {
     return $task;
   }
 
-  public static function createTask() {
+  public function createTask() {
     if (session_status() === PHP_SESSION_NONE) session_start();
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      return ($_POST['project_id']);
       $project = Project::findOne('projectName', $_POST['project_id']);
 
       if (!$project || $project->user_id !== $_SESSION['userId']) {
@@ -50,14 +49,14 @@ class TaskController {
         return $response;
       }
       
-      $tarea = new Task($_POST);
-      $tarea->project_id = $project->id;
-      $response = $tarea->save();
+      $task = new Task($_POST);
+      $task->project_id = $project->id;
+      $result = $task->save();
       $response = [
-        'tipo' => 'exito',
-        'id' => $response['id'],
-        'mensaje' => 'Agregado Correctamente',
-        'proyectoId' => $project->id
+        'id' => $result['id'],
+        'name' => $task->name,
+        'project_id' => $project->id,
+        'status' => $task->status
       ];
 
       return $response;

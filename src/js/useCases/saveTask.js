@@ -8,13 +8,18 @@ export const saveTask = async (taskObject) => {
   const task = new Task(taskObject);
 
   const taskToSave = taskModelToEndPoint(task);
+  const taskArray = Object.entries(taskToSave);
+
+  const formData = new FormData();
+  for (const [key, value] of taskArray) {
+    formData.append(`${key}`, value);
+  }
 
   if (task.id) {
-    taskUpdated = await updateTask(taskToSave);
+    taskUpdated = await updateTask(formData);
   } else {
-    taskUpdated = await createTask(taskToSave);
+    taskUpdated = await createTask(formData);
   }
-  console.log(taskUpdated);
 
   return endPointTaskToModel(taskUpdated);
 };
@@ -22,16 +27,12 @@ export const saveTask = async (taskObject) => {
 const createTask = async (task) => {
   const url = `http://localhost:3000/api/v1/task/create`;
 
-  const formData = new FormData();
-  formData.append("project_id", task.project_id);
   try {
-    console.log(task);
     const response = await fetch(url, {
       method: "POST",
-      body: formData,
+      body: task,
     });
     const result = await response.json();
-    console.log(result);
 
     return result;
   } catch (error) {
@@ -48,7 +49,7 @@ const updateTask = async (task) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(task),
+      body: task,
     });
 
     return await response.json();
