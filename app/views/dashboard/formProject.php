@@ -1,9 +1,9 @@
 <div class="campo">
-  <label for="nombre">Nombre Proyecto</label>
+  <label for="name">Nombre Proyecto</label>
   <input 
     type="text" 
-    name="nombre" 
-    id="nombre" 
+    name="name" 
+    id="name" 
     placeholder="Proyecto"
   >
 </div>

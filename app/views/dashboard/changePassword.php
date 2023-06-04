@@ -3,24 +3,24 @@
 
   <a href="/user/profile" class="btn">Volver</a>
 
-  <form action="/cambiar-clave" class="formulario" method="POST">
+  <form action="/user/change-password" class="formulario" method="POST">
     <div class="campo">
-      <label for="password_actual">Password Actual</label>
+      <label for="currentPassword">Contraseña Actual</label>
       <input 
         type="password" 
-        name="password_actual" 
-        id="password_actual" 
-        placeholder="Tu Password Actual"
+        name="currentPassword"
+        id="currentPassword" 
+        placeholder="Tu contraseña actual"
       >
     </div>
 
     <div class="campo">
-      <label for="password_nuevo">Password Nuevo</label>
+      <label for="password">Nueva contraseña</label>
       <input 
         type="password"
-        name="password_nuevo"
-        id="password_nuevo"
-        placeholder="Tu Password Nuevo"
+        name="password"
+        id="password"
+        placeholder="Tu nueva contraseña"
       >
     </div>
 

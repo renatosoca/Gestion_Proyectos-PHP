@@ -8,43 +8,59 @@ use App\Models\Task;
 class TaskController {
 
   public static function allTasks( string $project = '') {
-    session_start();
-    $url = sanitize($project);
+    if (session_status() === PHP_SESSION_NONE) session_start();
 
-    if (!$url) return Router::redirect('/dashboard');
-    $projectExist = Project::findOne('url', $url);
+    $project = sanitize($project);
 
-    if (!$projectExist || $projectExist->usuarioId !== $_SESSION['id']) header('Location: /404');
-    $tareas = Task::belongsTo('proyectoId', $projectExist->id);
+    if ($project === '') Router::redirect('/dashboard');
+    $projectExist = Project::findOne('projectName', $project);
+
+    if (!$projectExist || $projectExist->user_id !== $_SESSION['userId']) return json_encode(['error' => 'No existe el proyecto']);
+    $task = Task::belongsTo('project_id', $projectExist->id);
     
-    return $tareas;
+    return $task;
+  }
+
+  public static function getTask( string $id = '') {
+    if (session_status() === PHP_SESSION_NONE) session_start();
+
+    $id = sanitize($id);
+
+    if ($id === '') return json_encode(['error' => 'No existe la tarea']);
+    $task = Task::findOne('id', $id);
+
+    if (!$task || $task->user_id !== $_SESSION['userId']) return json_encode(['error' => 'No existe la tarea']);
+    
+    return $task;
   }
 
   public static function createTask() {
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) session_start();
+    
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $proyecto = Project::findOne('url', $_POST['proyectoId']);
+      return ($_POST['project_id']);
+      $project = Project::findOne('projectName', $_POST['project_id']);
 
-      if (!$proyecto || $proyecto->usuarioId !== $_SESSION['id']) {
-        $respuesta = [
+      if (!$project || $project->user_id !== $_SESSION['userId']) {
+        $response = [
           'tipo' => 'error',
           'mensaje' => 'Hubo un error al agregar la tarea'
         ];
 
-        return $respuesta;
+        return $response;
       }
       
       $tarea = new Task($_POST);
-      $tarea->proyectoId = $proyecto->id;
-      $resultado = $tarea->save();
-      $respuesta = [
+      $tarea->project_id = $project->id;
+      $response = $tarea->save();
+      $response = [
         'tipo' => 'exito',
-        'id' => $resultado['id'],
+        'id' => $response['id'],
         'mensaje' => 'Agregado Correctamente',
-        'proyectoId' => $proyecto->id
+        'proyectoId' => $project->id
       ];
 
-      return $respuesta;
+      return $response;
     }
   }
 
@@ -61,7 +77,7 @@ class TaskController {
         return;
       }
       $tarea = new Task($_POST);
-      $tarea->proyectoId = $proyecto->id;
+      $tarea->project_id = $proyecto->id;
       $resultado = $tarea->save();
       $respuesta = [
         'tipo' => 'exito',
@@ -89,7 +105,7 @@ class TaskController {
       }
 
       $tarea = new Task($_POST);
-      $tarea->proyectoId = $proyecto->id;
+      $tarea->project_id = $proyecto->id;
       $resultado = $tarea->delete();
       if ($resultado) {
         $respuesta = [

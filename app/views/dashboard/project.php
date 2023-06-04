@@ -1,6 +1,6 @@
 <div class="contenedor-sm">
   <div class="contenedor-nueva-tarea">
-    <button type="button" class="agregar-tarea" id="agregar-tarea">&#43; Nueva Tarea</button>
+    <button type="button" class="agregar-tarea" id="new-task">&#43; Nueva Tarea</button>
   </div>
 
   <div class="filtros" id="filtros">
@@ -31,6 +31,6 @@
 <?php 
   $script = "
   <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-  <script src='/build/js/tareas.js'></script>
+  <script src='/build/js/main.js' ></script>
   "; 
 ?>

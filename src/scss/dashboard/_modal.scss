@@ -1,55 +1,83 @@
-@use 'base/variables' as v;
-@use 'base/mixins' as m;
+@use "base/variables" as v;
+@use "base/mixins" as m;
 
 .modal {
-    position: absolute;
-    background-color: rgb(0 0 0 /.6);
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  position: absolute;
+  background-color: rgb(0 0 0 /0.6);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
-    .formulario {
-        max-width: 60rem;
-        background-color: v.$blanco;
-        padding: 2rem;
-        margin: 0 auto;
-        transition: all 500ms ease-in-out;
-        transform: translateY(-30rem);
-        opacity: 0;
-        border-radius: 1rem;
+  &__hidden {
+    display: none;
+  }
 
-        &.animar {
-            position: relative;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 1;
-        }
+  &__form {
+    max-width: 60rem;
+    background-color: v.$blanco;
+    padding: 2rem;
+    margin: 0 auto;
+    transition: all 500ms ease-in-out;
+    transform: translateY(-30rem);
+    opacity: 0;
+    border-radius: 1rem;
 
-        &.cerrar {
-            transform: translateY(-200%);
-            opacity: 0;
-        }
-
-        legend {
-            font-size: 2rem;
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 2rem;
-            display: block;
-        }
-
-        .opciones {
-            display: flex;
-            justify-content: space-between;
-
-            .submit-nueva-tarea {
-                @include m.boton(v.$indigo, v.$blanco)
-            }
-
-            .cerrar-modal {
-                @include m.boton(v.$rojo, v.$blanco)
-            }
-        }
+    &--show {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 1;
     }
+
+    &--hide {
+      transform: translateY(-200%);
+      opacity: 0;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  &__title {
+    margin: 0;
+  }
+  &__close {
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    background-color: red;
+    color: v.$blanco;
+    padding: 0.5rem 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  &__body {
+    margin: 2rem 0;
+  }
+  &__field {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    &--name {
+      max-width: 10rem;
+      width: 100%;
+      font-weight: 700;
+    }
+    &--value {
+      width: 100%;
+      padding: 1.2rem 1rem;
+      border: 0.1rem solid v.$grisClaro;
+      border-radius: 0.5rem;
+      outline: none;
+      font-size: 1.6rem;
+    }
+  }
+
+  &__submit {
+    @include m.boton(v.$indigo, v.$blanco);
+  }
 }

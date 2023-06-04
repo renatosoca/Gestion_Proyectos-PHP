@@ -7,8 +7,8 @@
   <ul class="listado-proyectos">
     <?php foreach ($projects as $row) { ?>
       <li>
-        <a href="/project/<?php echo $row->url; ?>" class="proyecto">
-          <?php echo $row->proyecto; ?>
+        <a href="/project/<?php echo $row->projectName; ?>" class="proyecto">
+          <?php echo $row->name; ?>
         </a>
       </li>
     <?php } ?>

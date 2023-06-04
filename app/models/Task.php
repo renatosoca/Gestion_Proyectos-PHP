@@ -15,6 +15,6 @@ class Task extends Model {
     $this->id = $args['id'] ?? '';
     $this->name = $args['name'] ?? '';
     $this->project_id = $args['project_id'] ?? '';
-    $this->status = $args['status'] ?? '';
+    $this->status = $args['status'] ?? 'pending';
   }
 }

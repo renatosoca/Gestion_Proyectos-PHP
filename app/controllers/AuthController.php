@@ -209,10 +209,10 @@ class AuthController {
     isAuth();
 
     $alerts = [];
-    $user = User::findOne( 'id', /* $_SESSION['id'] */ 1);
+    $user = User::findOne( 'id', $_SESSION['userId']);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $user->sincronizar($_POST);
+      $user->synchronize($_POST);
       $alerts = $user->userValidate();
 
       if (empty( $alerts )) {
@@ -223,7 +223,7 @@ class AuthController {
         $response = $user->save();
 
         if ($response) {
-          $_SESSION['name'] = $user->nombre;
+          $_SESSION['name'] = $user->name;
 
           User::setAlert('exito', 'Actualizado correctamente');
         }
@@ -243,29 +243,23 @@ class AuthController {
   public static function changePassword() {
     isAuth();
     $alertas = [];
-    $user = User::findOne( 'id', /* $_SESSION['id'] */ 1);
+    $user = User::findOne( 'id', $_SESSION['userId']);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $user->sincronizar($_POST);
-      $alertas = $user->validarPassNuevo();
+      $tempUser = new User($_POST);
+      $alertas = $tempUser->validateNewPassword();
 
       if (empty( $alertas )) {
-        $resultado = $user->comprobarPassword();
-        if ($resultado) {
-          $user->password = $user->password_nuevo;
+        $result = $user->verifyPassword($tempUser->currentPassword);
 
-          unset($user->password_actual);
-          unset($user->password_nuevo);
+        if ( !$result ) return User::setAlert('error', 'Contraseña actual es incorrecta');
+        
+        $user->password = $tempUser->password;
 
-          $user->hashPassword();
-          $resultado = $user->guardar();
-          
-          if ($resultado) {
-            User::setAlert('exito', 'Actualizado Correctamente');
-          }
-        } else {
-          User::setAlert('error', 'Password Incorrecto');
-        }
+        $user->hashPassword();
+        $response = $user->save();
+        
+        if ($response) return User::setAlert('exito', 'Actualizado Correctamente');
       }
     }
 

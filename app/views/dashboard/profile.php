@@ -3,15 +3,15 @@
 
   <a href="/user/change-password" class="btn">Cambiar Contraseña</a>
 
-  <form action="/profile" class="formulario" method="POST">
+  <form action="/user/profile" class="formulario" method="POST">
     <div class="campo">
-      <label for="nombre">Nombre</label>
+      <label for="name">Nombre</label>
       <input 
         type="text" 
-        name="nombre" 
-        id="nombre" 
-        value="<?php echo sanitize($user->nombre); ?>" 
-        placeholder="Tu Nombre"
+        name="name" 
+        id="name" 
+        value="<?php echo sanitize($user->name); ?>" 
+        placeholder="Tu bombre"
       >
     </div>
     

@@ -12,8 +12,7 @@ class User extends Model {
     public string $email;
     public string $password;
     public string $confirmPassword;
-    /* public string $password_actual;
-    public string $password_nuevo; */
+    public string $currentPassword;
     public string $token;
     public bool $hasVerifiedEmail;
 
@@ -24,8 +23,7 @@ class User extends Model {
       $this->email = $args['email'] ?? '';
       $this->password = $args['password'] ?? '';
       $this->confirmPassword = $args['confirmPassword'] ?? '';
-      /* $this->password_actual = $args['password_actual'] ?? '';
-      $this->password_nuevo = $args['password_nuevo'] ?? ''; */
+      $this->currentPassword = $args['currentPassword'] ?? '';
       $this->token = $args['token'] ?? '';
       $this->hasVerifiedEmail = $args['hasVerifiedEmail'] ?? false;
     }
@@ -67,16 +65,11 @@ class User extends Model {
       return self::$alerts;
     }
 
-    public function validarPassNuevo() {
-      /* if (!$this->password_actual) {
-        self::$alerts['error'][] = 'El password actual es obligatorio';
-      }
-      if (!$this->password_nuevo) {
-        self::$alerts['error'][] = 'El password nuevo es obligatorio';
-      }
-      if (strlen( $this->password_nuevo ) < 6 ) {
-        self::$alerts['error'][] = 'El password debe ser mayor a 6 caracteres';
-      } */
+    public function validateNewPassword() {
+      if (!$this->currentPassword) self::$alerts['error'][] = 'La contraseña actual es obligatorio';
+      if (strlen($this->currentPassword) < 6) self::$alerts['error'][] = 'La contraseña actual debe tener al menos 6 caracteres';
+      if (!$this->password) self::$alerts['error'][] = 'La nueva contraseña es obligatorio';
+      if (strlen($this->password) < 6) self::$alerts['error'][] = 'La nueva contraseña debe tener al menos 6 caracteres';
       return self::$alerts;
     }
 

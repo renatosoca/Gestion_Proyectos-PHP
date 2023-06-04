@@ -49,8 +49,9 @@ Router::post('/user/change-password', [AuthController::class, 'changePassword'])
 
 //API para las tareas
 Router::get('/api/v1/tasks/:project', [TaskController::class, 'allTasks']);
-Router::post('/api/tarea', [TaskController::class, 'createTask']);
-Router::post('/api/tarea/actualizar', [TaskController::class, 'updateTask']);
-Router::post('/api/tarea/eliminar', [TaskController::class, 'deleteTask']);
+Router::get('/api/v1/task/get/:id', [TaskController::class, 'getTask']);
+Router::post('/api/v1/task/create', [TaskController::class, 'createTask']);
+Router::post('/api/v1/task/update/:id', [TaskController::class, 'updateTask']);
+Router::post('/api/v1/task/delete/:id', [TaskController::class, 'deleteTask']);
 
 Router::dispatch();

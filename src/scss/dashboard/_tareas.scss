@@ -1,70 +1,74 @@
-@use 'base/variables' as v;
-@use 'base/mixins' as m;
+@use "base/variables" as v;
+@use "base/mixins" as m;
 
 .contenedor-nueva-tarea {
-
-    .agregar-tarea {
-        @include m.boton(v.$cyan, v.$blanco);
-        margin: 0 auto;
-    }
+  .agregar-tarea {
+    @include m.boton(v.$cyan, v.$blanco);
+    margin: 0 auto;
+  }
 }
 
-.listado-tareas {
-    list-style: none;
-    margin-top: 3rem;
+.list__tasks {
+  list-style: none;
+  margin-top: 3rem;
 
-    .no-tareas {
-        text-align: center;
+  .task {
+    padding: 0.5rem 2rem;
+    border-bottom: 0.2rem solid darken(v.$grisClaro, 20%);
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:last-of-type {
+      border: none;
     }
 
-    .tarea {
-        padding: .5rem 2rem;
-        border-bottom: .2rem solid darken(v.$grisClaro, 20%);
-        margin-bottom: 1rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        &:last-of-type {
-            border: none;
-        }
-
-        p {
-            font-size: 1.7rem;
-
-        }
-
-        .opciones {
-            display: flex;
-            gap: 1.5rem;
-
-            button {
-                border: none;
-                font-size: 1rem;
-                padding: .8rem 1rem;
-                text-transform: uppercase;
-                font-weight: 700;
-                border-radius: 1rem;
-
-                &:hover {
-                    cursor: pointer;
-                }
-
-                &.completo {
-                    background-color: v.$azul;
-                    color: v.$blanco;
-                }
-
-                &.pendiente {
-                    background-color: v.$naranja;
-                    color: v.$blanco;
-                }
-
-                &.eliminar-tarea {
-                    background-color: v.$rojo;
-                    color: v.$blanco;
-                }
-            }
-        }
+    &__name {
+      font-size: 1.7rem;
     }
+
+    &__empty {
+      text-align: center;
+      color: v.$blanco;
+      font-weight: 700;
+    }
+
+    &__options {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    &__status {
+      border: none;
+      font-size: 1rem;
+      padding: 0.8rem 1rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      border-radius: 1rem;
+      cursor: pointer;
+
+      &.completed {
+        background-color: v.$azul;
+        color: v.$blanco;
+      }
+
+      &.pending {
+        background-color: v.$naranja;
+        color: v.$blanco;
+      }
+    }
+
+    &__delete {
+      border: none;
+      font-size: 1rem;
+      padding: 0.8rem 1rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      border-radius: 1rem;
+      cursor: pointer;
+      background-color: v.$rojo;
+      color: v.$blanco;
+    }
+  }
 }

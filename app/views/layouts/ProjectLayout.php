@@ -12,13 +12,13 @@
 <body>
 
   <div class="layout__project">
-    <div class="dashboard">
+    <div class="dashboard" id="dashboard">
       <?php include_once __DIR__.'/../template/sidebar.php'; ?>
 
       <div class="principal">
         <?php  include_once __DIR__.'/../template/header.php'; ?>
 
-        <div>
+        <div class="layout__container">
           <h2 class="nombre-pagina"><?php echo $title; ?></h2>
           <?php echo $content; ?>
         </div>

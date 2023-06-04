@@ -2,10 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Models\Project;
 use App\Router;
-use Model\Usuario;
-use Model\Proyecto;
+use App\Models\Project;
 
 class ProjectController {
 
@@ -30,14 +28,14 @@ class ProjectController {
     isAuth();
     $project = sanitize($project);
     
-    $projectExist = Project::findOne('url', $project);
+    $projectExist = Project::findOne('projectName', $project);
 
-    if (!$projectExist) return Router::redirect('/dashboard');
+    if (empty($projectExist)) return Router::redirect('/dashboard');
 
-    if ($projectExist->user_id !== $_SESSION['id']) return Router::redirect('/dashboard');
+    if ($projectExist->user_id !== $_SESSION['userId']) return Router::redirect('/dashboard');
 
     Router::render('dashboard/project', 'ProjectLayout', [
-      'title' => $projectExist->proyecto,
+      'title' => $projectExist->name,
       'name' => $_SESSION['name'] ?? '',
     ]);
 
@@ -56,11 +54,11 @@ class ProjectController {
 
       if (empty($alerts)) {
         $project->generarURL();
-        $project->user_id = $_SESSION['userId'] ?? 1;
+        $project->user_id = $_SESSION['userId'];
         
-        $resultado = $project->save();
+        $result = $project->save();
 
-        if ($resultado) return Router::redirect('/project/'.$project->projectName);
+        if (is_array($result)) Router::redirect('/project/'.$project->projectName);
       }
     }
 
