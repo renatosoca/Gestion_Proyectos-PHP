@@ -2,15 +2,14 @@ import { renderAddBtnTask } from "./presentations/renderAddBtnTask/renderAddBtn"
 import { renderModal } from "./presentations/renderModal/renderModal";
 import { renderTasks } from "./presentations/renderTasks/renderTasks";
 import taskStore from "./store/taskStore";
-import { loadTaskByProject } from "./useCases/loadTaskByProject";
 import { saveTask } from "./useCases/saveTask";
 
 const layout = document.querySelector("#dashboard");
+const element = document.querySelector("#listado-tareas");
+
 const projectId = window.location.href.split("/")[4];
 
-/* loadTaskByProject(projectId); */
-
-export const taskApp = async (element) => {
+export const taskApp = async () => {
   element.innerHTML = `
     <div class="loading">
       <span class="loading__title" >Cargando</span>
@@ -37,6 +36,4 @@ export const taskApp = async (element) => {
     const task = await saveTask(newTaskObject);
     console.log(task);
   });
-
-  return;
 };
