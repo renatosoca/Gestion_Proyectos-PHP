@@ -1,16 +1,6 @@
 @use "base/variables" as v;
 
 /** Media Queries **/
-@mixin sm {
-  @media (max-width: v.$phone) {
-    @content;
-  }
-}
-@mixin md {
-  @media (max-width: v.$md) {
-    @content;
-  }
-}
 
 @mixin telefono {
   @media (min-width: v.$telefono) {
@@ -47,6 +37,17 @@
   &:hover {
     background-color: darken($bgColor, 10%);
     cursor: pointer;
+  }
+}
+
+@mixin sm {
+  @media (max-width: v.$sm) {
+    @content;
+  }
+}
+@mixin md {
+  @media (max-width: v.$md) {
+    @content;
   }
 }
 

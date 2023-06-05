@@ -8,7 +8,8 @@ use App\Models\Task;
 class TaskController {
 
   public static function allTasks( string $project = '') {
-    if (session_status() === PHP_SESSION_NONE) session_start();
+    $isAuth = isAuth();
+    if (!$isAuth) return ['error' => 'No hay usuario autenticado'];
 
     $project = sanitize($project);
 
@@ -22,7 +23,9 @@ class TaskController {
   }
 
   public static function getTask( string $id = '') {
-    if (session_status() === PHP_SESSION_NONE) session_start();
+    $isAuth = isAuth();
+    if (!$isAuth) return ['error' => 'No hay usuario autenticado'];
+
     $id = sanitize($id);
 
     if ($id === '') return json_encode(['error' => 'No existe la tarea']);
@@ -34,7 +37,8 @@ class TaskController {
   }
 
   public function createTask() {
-    if (session_status() === PHP_SESSION_NONE) session_start();
+    $isAuth = isAuth();
+    if (!$isAuth) return ['error' => 'No hay usuario autenticado'];
     
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $project = Project::findOne('projectName', $_POST['project_id']);
@@ -63,7 +67,8 @@ class TaskController {
   }
 
   public function updateTask() {
-    if (session_status() === PHP_SESSION_NONE) session_start();
+    $isAuth = isAuth();
+    if (!$isAuth) return ['error' => 'No hay usuario autenticado'];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $project = Project::findOne('id', $_POST['project_id']);
@@ -91,7 +96,9 @@ class TaskController {
   }
 
   public static function deleteTask( string $id = '') {
-    if (session_status() === PHP_SESSION_NONE) session_start();
+    $isAuth = isAuth();
+    if (!$isAuth) return ['error' => 'No hay usuario autenticado'];
+    
     $id = sanitize($id);
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

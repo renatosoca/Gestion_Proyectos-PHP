@@ -9,7 +9,9 @@ use App\Utils\Email;
 class AuthController {
 
   public static function AuthUser() {
-    session_start();
+    $isAuth = isAuth();
+    if ($isAuth) Router::redirect('/dashboard');
+
     $alerts = [];
     $tempUser = new User();
 
@@ -211,7 +213,8 @@ class AuthController {
   }
 
   public static function profile() {
-    isAuth();
+    $isAuth = isAuth();
+    if (!$isAuth) Router::redirect('/');
 
     $alerts = [];
     $user = User::findOne( 'id', $_SESSION['userId']);
@@ -246,7 +249,9 @@ class AuthController {
   }
 
   public static function changePassword() {
-    isAuth();
+    $isAuth = isAuth();
+    if (!$isAuth) Router::redirect('/');
+
     $alertas = [];
     $user = User::findOne( 'id', $_SESSION['userId']);
 

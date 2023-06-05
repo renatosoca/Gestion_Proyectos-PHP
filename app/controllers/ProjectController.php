@@ -8,8 +8,8 @@ use App\Models\Project;
 class ProjectController {
 
   public static function index() {
-    session_start();
-    //isAuth();
+    $isAuth = isAuth();
+    if (!$isAuth) Router::redirect('/');
 
     $projects = Project::findAll('user_id', $_SESSION['userId']);
 
@@ -24,8 +24,9 @@ class ProjectController {
   }
 
   public static function project( string $project = '') {
-    session_start();
-    isAuth();
+    $isAuth = isAuth();
+    if (!$isAuth) Router::redirect('/');
+
     $project = sanitize($project);
     
     $projectExist = Project::findOne('projectName', $project);
@@ -43,8 +44,8 @@ class ProjectController {
   }
 
   public static function createProject() {
-    session_start();
-    isAuth();
+    $isAuth = isAuth();
+    if (!$isAuth) Router::redirect('/');
 
     $alerts = [];
 
