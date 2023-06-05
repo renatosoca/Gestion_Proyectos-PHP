@@ -64,7 +64,6 @@ const onChangeTask = async (taskUpdated) => {
     return task;
   });
 
-  // Si no se encontró la tarea, se agrega
   if (!wasFound) {
     state.tasks.push(taskUpdated);
   }

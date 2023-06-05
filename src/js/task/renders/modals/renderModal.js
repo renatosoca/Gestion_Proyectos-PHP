@@ -1,13 +1,20 @@
 import { getTaskById } from "../../useCases/getTaskById";
 
-let modal, form;
+let modal,
+  form,
+  editModal = false;
 let loadedTask = {};
 
 export const showModal = async (id) => {
   if (modal) {
     modal.classList.remove("modal__hidden");
   }
-  if (!id) return;
+  if (!id) {
+    setFormValues();
+    return;
+  }
+
+  editModal = true;
 
   const task = await getTaskById(id);
   setFormValues(task);
@@ -22,7 +29,16 @@ export const hiddenModal = () => {
 };
 
 const setFormValues = (task) => {
+  form.querySelector(".modal__title").textContent = task
+    ? "Editar tarea"
+    : "Crear tarea";
+  form.querySelector('button[type="submit"]').textContent = task
+    ? "Editar tarea"
+    : "Crear tarea";
+
+  if (!task) return;
   form.querySelector("#name").value = task.name;
+  loadedTask = task;
 };
 
 export const renderModal = (element, callback) => {
@@ -32,10 +48,10 @@ export const renderModal = (element, callback) => {
   modal.classList.add("modal", "modal__hidden");
 
   form = document.createElement("form");
-  form.classList.add("modal__form");
+  form.classList.add("modal__form", "modal__form--show");
   form.innerHTML = `
     <div class="modal__header">
-      <h2 class="modal__title">Editar tarea</h2>
+      <h2 class="modal__title">Crear tarea</h2>
       <button class="modal__close" type="button">X</button>
     </div>
     <div class="modal__body">
@@ -45,32 +61,28 @@ export const renderModal = (element, callback) => {
       </div>
     </div>
     <div class="modal__footer">
-      <button class="modal__submit" type="submit">Guardar</button>
+      <button class="modal__submit" type="submit">Crear</button>
     </div>
   `;
-
-  setTimeout(() => {
-    const modal = document.querySelector(".modal__form");
-    modal.classList.add("modal__form--show");
-  }, 0);
 
   modal.appendChild(form);
   element.appendChild(modal);
 
   const btnClose = modal.querySelector(".modal__close");
 
-  modal.addEventListener(
-    "click",
-    ({ target }) => target.classList.contains("modal") && hiddenModal()
-  );
+  modal.addEventListener("click", ({ target }) => {
+    if (target.classList.contains("modal")) {
+      hiddenModal();
+    }
+  });
   btnClose.addEventListener("click", hiddenModal);
 
+  //Events Form
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const formData = new FormData(form);
     const taskObject = { ...loadedTask };
-
     for (const [key, value] of formData) {
       taskObject[key] = value;
     }

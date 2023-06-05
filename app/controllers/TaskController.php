@@ -54,7 +54,7 @@ class TaskController {
       $response = [
         'id' => $result['id'],
         'name' => $task->name,
-        'project_id' => $project->id,
+        'project_id' => $task->project_id,
         'status' => $task->status
       ];
 
@@ -62,29 +62,31 @@ class TaskController {
     }
   }
 
-  public static function updateTask() {
-    session_start();
+  public function updateTask() {
+    if (session_status() === PHP_SESSION_NONE) session_start();
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $proyecto = Project::findOne('url', $_POST['proyectoId']);
-      if (!$proyecto || $proyecto->usuarioId !== $_SESSION['id']) {
-        $respuesta = [
+      $project = Project::findOne('id', $_POST['project_id']);
+      if (!$project || $project->user_id !== $_SESSION['userId']) {
+        $response = [
           'tipo' => 'error',
           'mensaje' => 'Hubo un error al actualizar la tarea'
         ];
-        echo json_encode($respuesta);
-        return;
+        
+        return $response;
       }
-      $tarea = new Task($_POST);
-      $tarea->project_id = $proyecto->id;
-      $resultado = $tarea->save();
-      $respuesta = [
-        'tipo' => 'exito',
-        'id' => $tarea->id,
-        'mensaje' => 'Actualizado Correctamente',
-        'proyectoId' => $proyecto->id
+
+      $task = new Task($_POST);
+      $task->project_id = $project->id;
+      $result = $task->save();
+      $response = [
+        'id' => $task->id,
+        'name' => $task->name,
+        'project_id' => $project->id,
+        'status' => $task->status
       ];
 
-      return $respuesta;
+      return $response;
     }
   }
 

@@ -1,5 +1,5 @@
 import taskStore, { Filters } from "../store/taskStore";
-import { renderAddBtnTask } from "./renders/buttonsTask/renderAddBtn";
+import { renderAddBtnTask } from "./renders/buttons/renderAddBtn";
 import { renderModal } from "./renders/modals/renderModal";
 import { renderTasks } from "./renders/tasks/renderTasks";
 import { saveTask } from "./useCases/saveTask";
@@ -30,7 +30,7 @@ export const taskApp = async () => {
   renderModal(layout, async (taskObject) => {
     const newTaskObject = {
       ...taskObject,
-      projectId,
+      projectId: taskObject.projectId ? taskObject.projectId : projectId,
     };
     const task = await saveTask(newTaskObject);
     taskStore.onChangeTask(task);

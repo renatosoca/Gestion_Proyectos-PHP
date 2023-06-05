@@ -8,15 +8,14 @@ export const saveTask = async (taskObject) => {
   const task = new Task(taskObject);
 
   const taskToSave = taskModelToEndPoint(task);
-  const taskArray = Object.entries(taskToSave);
 
   const formData = new FormData();
-  for (const [key, value] of taskArray) {
+  for (const [key, value] of Object.entries(taskToSave)) {
     formData.append(`${key}`, value);
   }
 
   if (task.id) {
-    taskUpdated = await updateTask(formData);
+    taskUpdated = await updateTask(formData, task.id);
   } else {
     taskUpdated = await createTask(formData);
   }
@@ -24,13 +23,13 @@ export const saveTask = async (taskObject) => {
   return endPointTaskToModel(taskUpdated);
 };
 
-const createTask = async (task) => {
+const createTask = async (formData) => {
   const url = `http://localhost:3000/api/v1/task/create`;
 
   try {
     const response = await fetch(url, {
       method: "POST",
-      body: task,
+      body: formData,
     });
     const result = await response.json();
 
@@ -40,19 +39,17 @@ const createTask = async (task) => {
   }
 };
 
-const updateTask = async (task) => {
-  const url = `http://localhost:3000/api/v1/task/${task.id}`;
+const updateTask = async (formData, id) => {
+  const url = `http://localhost:3000/api/v1/task/update/${id}`;
 
   try {
     const response = await fetch(url, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: task,
+      body: formData,
     });
 
-    return await response.json();
+    const result = await response.json();
+    return result;
   } catch (error) {
     console.log(error);
   }
