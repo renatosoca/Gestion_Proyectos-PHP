@@ -1,7 +1,7 @@
 import taskStore, { Filters } from "../store/taskStore";
-import { renderAddBtnTask } from "./presentations/renderAddBtnTask/renderAddBtn";
-import { renderModal } from "./presentations/renderModal/renderModal";
-import { renderTasks } from "./presentations/renderTasks/renderTasks";
+import { renderAddBtnTask } from "./renders/buttonsTask/renderAddBtn";
+import { renderModal } from "./renders/modals/renderModal";
+import { renderTasks } from "./renders/tasks/renderTasks";
 import { saveTask } from "./useCases/saveTask";
 
 const layout = document.querySelector("#dashboard");

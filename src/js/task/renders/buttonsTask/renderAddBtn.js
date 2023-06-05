@@ -1,4 +1,4 @@
-import { showModal } from "../renderModal/renderModal";
+import { showModal } from "../modals/renderModal";
 
 export const renderAddBtnTask = () => {
   const btn = document.querySelector("#new-task");

@@ -1,7 +1,7 @@
 import taskStore from "../../../store/taskStore";
 import { deleteTaskById } from "../../useCases/deleteTaskById";
 import { getTaskById } from "../../useCases/getTaskById";
-import { showModal } from "../renderModal/renderModal";
+import { showModal } from "../modals/renderModal";
 
 let list;
 const listStatus = {
@@ -23,6 +23,24 @@ const taskSelected = async (e) => {
   const idTask = btnEdit.dataset.idTask;
 
   showModal(idTask);
+};
+
+const taskStatus = async (e, projectId) => {
+  const btnStatus = e.target.closest(".select_status");
+  if (!btnStatus) return;
+  //Falata
+
+  const idTask = btnStatus.dataset.idTask;
+  const status = btnStatus.dataset.taskStatus;
+
+  try {
+    const task = await getTaskById(idTask);
+    await taskStore.reloadPage(projectId);
+
+    renderTasks();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const deleteTask = async (e, projectId) => {
@@ -48,6 +66,7 @@ export const renderTasks = (element, projectId) => {
     element.appendChild(list);
 
     list.addEventListener("click", taskSelected);
+    list.addEventListener("click", (event) => taskStatus(event, projectId));
     list.addEventListener("click", (event) => deleteTask(event, projectId));
   }
 
@@ -73,7 +92,7 @@ export const renderTasks = (element, projectId) => {
       <p class="task__name select_task" data-id-task="${id}">${name}</p>
 
       <div class="task__options">
-        <button class="task__status ${status.toLowerCase()} select_tas" data-task-status="${status}">
+        <button class="task__status ${status.toLowerCase()} select_status" data-task-status="${status}">
           ${listStatus[status]}
         </button>
 
