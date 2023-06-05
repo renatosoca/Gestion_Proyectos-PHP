@@ -88,33 +88,26 @@ class TaskController {
     }
   }
 
-  public static function deleteTask() {
-    session_start();
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      $proyecto = Project::findOne('url', $_POST['proyectoId']);
+  public static function deleteTask( string $id = '') {
+    if (session_status() === PHP_SESSION_NONE) session_start();
+    $id = sanitize($id);
 
-      if (!$proyecto || $proyecto->usuarioId !== $_SESSION['id']) {
-        $respuesta = [
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $project = Project::findOne('projectName', $_POST['projectId']);
+
+      if (!$project || $project->user_id !== $_SESSION['userId']) {
+        $response = [
           'tipo' => 'error',
           'mensaje' => 'Hubo un error al Eliminar la tarea'
         ];
         
-        return $respuesta;
+        return $response;
       }
 
-      $tarea = new Task($_POST);
-      $tarea->project_id = $proyecto->id;
-      $resultado = $tarea->delete();
-      if ($resultado) {
-        $respuesta = [
-          'tipo' => 'exito',
-          'id' => $tarea->id,
-          'mensaje' => 'Actualizado Correctamente',
-          'proyectoId' => $proyecto->id
-        ];
-        
-        return $respuesta;
-      }
+      $task = new Task(['id' => $id]);
+      $task->project_id = $project->id;
+      $result = $task->delete();
+      return $result;
     }
   }
 }

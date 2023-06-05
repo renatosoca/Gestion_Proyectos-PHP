@@ -1,4 +1,5 @@
-import taskStore from "../../store/taskStore";
+import taskStore from "../../../store/taskStore";
+import { deleteTaskById } from "../../useCases/deleteTaskById";
 import { getTaskById } from "../../useCases/getTaskById";
 import { showModal } from "../renderModal/renderModal";
 
@@ -24,24 +25,34 @@ const taskSelected = async (e) => {
   showModal(idTask);
 };
 
-const deleteTask = (e) => {
+const deleteTask = async (e, projectId) => {
   const btnDelete = e.target.closest(".delete_task");
   if (!btnDelete) return;
 
   const idTask = btnDelete.dataset.idTask;
-  //const task = taskStore.getTaskById(idTask);
-  console.log(idTask);
+  try {
+    await deleteTaskById(idTask, projectId);
+    await taskStore.reloadPage(projectId);
+
+    renderTasks();
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const renderTasks = (element) => {
-  const tasks = taskStore.getTasks();
+export const renderTasks = (element, projectId) => {
+  const tasks = taskStore.getTasks(taskStore.getCurrentFilter());
 
   if (!list) {
     list = createListTasks();
     element.appendChild(list);
 
     list.addEventListener("click", taskSelected);
-    list.addEventListener("click", deleteTask);
+    list.addEventListener("click", (event) => deleteTask(event, projectId));
+  }
+
+  while (list.firstChild) {
+    list.removeChild(list.firstChild);
   }
 
   if (tasks.length === 0) {
@@ -50,10 +61,6 @@ export const renderTasks = (element) => {
     taskElement.classList.add("task__empty");
     list.appendChild(taskElement);
     return;
-  }
-
-  while (list.firstChild) {
-    list.removeChild(list.firstChild);
   }
 
   tasks.forEach((task) => {

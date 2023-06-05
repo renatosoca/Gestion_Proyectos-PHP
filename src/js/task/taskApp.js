@@ -1,7 +1,7 @@
+import taskStore, { Filters } from "../store/taskStore";
 import { renderAddBtnTask } from "./presentations/renderAddBtnTask/renderAddBtn";
 import { renderModal } from "./presentations/renderModal/renderModal";
 import { renderTasks } from "./presentations/renderTasks/renderTasks";
-import taskStore from "./store/taskStore";
 import { saveTask } from "./useCases/saveTask";
 
 const layout = document.querySelector("#dashboard");
@@ -18,13 +18,13 @@ export const taskApp = async () => {
     </div>   
   `;
 
-  await taskStore.loadNextPage(projectId);
+  await taskStore.loadTask(projectId);
 
   while (element.firstChild) {
     element.removeChild(element.firstChild);
   }
 
-  renderTasks(element);
+  renderTasks(element, projectId);
 
   renderAddBtnTask();
   renderModal(layout, async (taskObject) => {
@@ -37,14 +37,30 @@ export const taskApp = async () => {
 
     renderTasks();
   });
+
+  filtersTasks.forEach((filter) => {
+    filter.addEventListener("click", () => {
+      const status = filter.value;
+
+      switch (filter.value) {
+        case "all":
+          taskStore.setFilter(Filters.all);
+          break;
+
+        case "pending":
+          taskStore.setFilter(Filters.pending);
+          break;
+
+        case "completed":
+          taskStore.setFilter(Filters.completed);
+          break;
+
+        default:
+          break;
+      }
+      taskStore.setFilter(status);
+      renderTasks();
+    });
+  });
 };
 taskApp();
-
-filtersTasks.forEach((filter) => {
-  filter.addEventListener("click", () => {
-    const status = filter.value;
-    console.log(status);
-    //taskStore.setFilter(status);
-    //renderTasks();
-  });
-});

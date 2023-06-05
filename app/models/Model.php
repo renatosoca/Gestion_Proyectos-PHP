@@ -209,7 +209,7 @@ class Model {
       $response = self::$database->prepare( $query );
       $result = $response->execute();
   
-      return $result;
+      return true;
     } catch (\Throwable $th) {
       return false;
     }

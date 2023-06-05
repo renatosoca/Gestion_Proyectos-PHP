@@ -9,7 +9,7 @@
 
       <div class="campo">
         <label for="todas">Todos</label>
-        <input type="radio" name="filtro" id="todas" value="" checked>
+        <input type="radio" name="filtro" id="todas" value="all" checked>
       </div>
 
       <div class="campo">
