@@ -2,16 +2,19 @@
 @use "base/mixins" as m;
 
 .register {
-  .titulo {
-    @include m.textoDegradado(v.$morado);
+  max-width: 60rem;
+  width: 95%;
+
+  .title {
+    @include m.textGradient(v.$indigo, v.$indigo, to right);
     margin-bottom: 0%;
   }
 
-  .btn {
-    background-color: v.$morado;
+  .form__submit {
+    background-color: v.$indigo;
   }
 
-  .acciones {
+  .links {
     a {
       color: v.$morado;
     }

@@ -2,15 +2,18 @@
 @use "base/mixins" as m;
 
 .login {
-  .titulo {
-    @include m.textoDegradado(v.$cyan);
+  max-width: 60rem;
+  width: 95%;
+
+  .title {
+    @include m.textGradient(v.$cyan, lighten(v.$cyan, 30%));
   }
 
-  .btn {
+  .form__submit {
     background-color: v.$cyan;
   }
 
-  .acciones {
+  .links {
     a {
       color: v.$cyan;
     }

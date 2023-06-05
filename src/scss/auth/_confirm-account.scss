@@ -3,7 +3,7 @@
 
 .confirm-account {
   .titulo {
-    @include m.textoDegradado(v.$indigo);
+    @include m.textGradient(v.$indigo);
   }
 
   .acciones {

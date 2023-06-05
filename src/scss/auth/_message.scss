@@ -3,6 +3,6 @@
 
 .message {
   .titulo {
-    @include m.textoDegradado(v.$naranja);
+    @include m.textGradient(v.$naranja);
   }
 }

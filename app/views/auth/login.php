@@ -1,16 +1,16 @@
 <div class="container login">
-  <h1 class="titulo">Tasks</h1>
-  <p class="tagline">Crea y administra tus proyectos</p>
+  <h1 class="title">Tasks</h1>
+  <p class="tagline">Administra tus proyectos</p>
 
   <div class="container-sm">
-    <p class="descripcion-pagina">Iniciar Sesión</p>
 
     <?php include_once __DIR__.'/../template/alerts.php'; ?>
 
-    <form action="/" method="POST" class="formulario">
-      <div class="campo">
-        <label for="email">Correo</label>
+    <form action="/" method="POST" class="form">
+      <div class="form__field">
+        <label for="email" class="form__field--label">Correo</label>
         <input 
+          class="form__field--input"
           type="email" 
           name="email" 
           id="email" 
@@ -18,9 +18,10 @@
         >
       </div>
 
-      <div class="campo">
-        <label for="password">Contraseña</label>
+      <div class="form__field">
+        <label for="password" class="form__field--label">Contraseña</label>
         <input 
+        class="form__field--input"
           type="password" 
           name="password" 
           id="password"
@@ -28,16 +29,17 @@
         >
       </div>
       
-      <input 
+      <button 
         type="submit" 
-        value="Ingresar" 
-        class="btn"
+        class="form__submit"
       >
+        Iniciar sesión
+      </button>
     </form>
 
-    <div class="acciones">
-      <a href="/register">Aún no tienes una Cuenta? Crea Una</a>
-      <a href="/forgot-password">Olvidaste tu Password?</a>
+    <div class="links">
+      <p class="links__link--text">Aún no tienes una Cuenta? <a href="/register" class="links__link">Crear Una</a></p>
+      <a class="links__link" href="/forgot-password">Olvide mi contraseña</a>
     </div>
   </div> <!-- .container-sm -->
 </div> <!-- .container -->
