@@ -1,6 +1,17 @@
 @use "base/variables" as v;
 
 /** Media Queries **/
+@mixin sm {
+  @media (max-width: v.$phone) {
+    @content;
+  }
+}
+@mixin md {
+  @media (max-width: v.$md) {
+    @content;
+  }
+}
+
 @mixin telefono {
   @media (min-width: v.$telefono) {
     @content;
@@ -39,6 +50,27 @@
   }
 }
 
+@mixin button($bgColor, $colorText) {
+  background-color: $bgColor;
+  color: $colorText;
+  display: block;
+  margin-top: 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 1.3rem 0;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 700;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+
+  &:hover {
+    background-color: darken($bgColor, 10%);
+    cursor: pointer;
+  }
+}
+
 @mixin grid($colums, $gap) {
   display: grid;
   gap: $gap;
@@ -55,6 +87,6 @@
   color: transparent;
   background-clip: text;
   text-align: center;
-  font-size: 10rem;
+  font-size: clamp(5rem, 12vw, 10rem);
   margin: 0%;
 }

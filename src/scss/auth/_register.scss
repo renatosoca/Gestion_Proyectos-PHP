@@ -15,8 +15,8 @@
   }
 
   .links {
-    a {
-      color: v.$morado;
+    &__link {
+      color: v.$indigo;
     }
   }
 }

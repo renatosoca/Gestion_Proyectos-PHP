@@ -35,7 +35,7 @@ class Email {
       $mail->isHTML(true);
       $mail->CharSet = 'UTF-8';
 
-      $company = 'BarberWorks';
+      $company = 'Projetify';
       
       ob_start();
       include_once __DIR__ . "/../views/emails/$template.php";

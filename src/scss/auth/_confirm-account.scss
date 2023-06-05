@@ -2,15 +2,16 @@
 @use "base/mixins" as m;
 
 .confirm-account {
-  .titulo {
-    @include m.textGradient(v.$indigo);
+  max-width: 60rem;
+  width: 95%;
+
+  .title {
+    @include m.textGradient(v.$orange, v.$orange);
   }
 
-  .acciones {
-    justify-content: center;
-
-    a {
-      color: v.$indigo;
+  .links {
+    &__link {
+      @include m.button(v.$orange, v.$white);
     }
   }
 }

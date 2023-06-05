@@ -2,7 +2,12 @@
 @use "base/mixins" as m;
 
 .message {
-  .titulo {
-    @include m.textGradient(v.$naranja);
+  .title {
+    @include m.textGradient(v.$orange, v.$orange);
+  }
+
+  &__description {
+    font-weight: 600;
+    color: v.$lightGray;
   }
 }

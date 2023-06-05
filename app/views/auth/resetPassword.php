@@ -1,5 +1,5 @@
 <div class="contenedor reset-password">
-  <h1 class="titulo">UpTask</h1>
+  <h1 class="title">UpTask</h1>
   <p class="tagline">Crea y administra tus proyectos</p>
 
   <div class="contenedor-sm">
@@ -10,10 +10,11 @@
       if (!$error) :
     ?>
 
-    <form method="POST" class="formulario">
-      <div class="campo">
-        <label for="password">Contraseña</label>
-        <input 
+    <form method="POST" class="form">
+      <div class="form__field">
+        <label for="password" class="form__field--label">Contraseña</label>
+        <input
+          class="form__field--input"
           type="password" 
           name="password" 
           id="password" 
@@ -24,15 +25,15 @@
       <input 
         type="submit" 
         value="Cambiar Password" 
-        class="btn"
+        class="form__submit"
       >
     </form>
 
     <?php endif; ?>
 
-    <div class="acciones">
-      <a href="/">Ya tienes una cuenta? Inicia Sesión</a>
-      <a href="/register">Aún no tienes una Cuenta? Crea Una</a>
+    <div class="links">
+      <p class="links__link--text">Ya tienes una cuenta? <a href="/" class="links__link">Inicia sesión</a></p>
+      <p class="links__link--text">Aún no tienes una Cuenta? <a href="/register" class="links__link">Crear Una</a></p>
     </div>
   </div> <!-- .contenedor-sm -->
 </div> <!-- .contenedor -->

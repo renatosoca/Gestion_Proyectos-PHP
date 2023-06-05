@@ -14,7 +14,7 @@
   }
 
   .links {
-    a {
+    &__link {
       color: v.$cyan;
     }
   }

@@ -23,14 +23,10 @@ p {
   margin: 0%;
 }
 
-.descripcion-pagina {
-  text-align: center;
-}
-
 .tagline {
   font-family: v.$fuente_headings;
   font-weight: bold;
   color: v.$negro;
-  font-size: 3rem;
+  font-size: clamp(1.5rem, 4vw, 3rem);
   text-align: center;
 }

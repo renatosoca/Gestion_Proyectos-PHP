@@ -1,16 +1,16 @@
 <div class="container forgot-password">
-  <h1 class="titulo">Tasks</h1>
-  <p class="tagline">Crea y administra tus proyectos</p>
+  <h1 class="title">Tasks</h1>
+  <p class="tagline">Recupera el acceso a tu cuenta</p>
 
   <div class="container-sm">
-    <p class="descripcion-pagina">Recupera tu contraseña</p>
 
     <?php include_once __DIR__.'/../template/alerts.php'; ?>
 
-    <form action="/forgot-password" method="POST" class="formulario">
-      <div class="campo">
-        <label for="email">Email</label>
+    <form action="/forgot-password" method="POST" class="form">
+      <div class="form__field">
+        <label for="email" class="form__field--label">Email</label>
         <input 
+          class="form__field--input"
           type="email" 
           name="email" 
           id="email" 
@@ -18,12 +18,13 @@
         >
       </div>
       
-      <input type="submit" value="Enviar Instrucciones" class="btn">
+      <button type="submit" class="form__submit">
+        Enviar Instrucciones
+      </button>
     </form>
 
-    <div class="acciones">
-      <a href="/">Ya tienes una cuenta? Inicia Sesión</a>
-      <a href="/register">Aún no tienes una Cuenta? Crea Una</a>
+    <div class="links">
+      <p class="links__link--text">Ya tienes una cuenta? <a href="/" class="links__link">Inicia sesión</a></p>
     </div>
   </div> <!-- .container-sm -->
 </div> <!-- .container -->

@@ -66,13 +66,11 @@ class AuthController {
 
         $mail = new Email($user->email, $user->name, $user->lastname, $user->token);
         $response = $mail->SendMail(
-          'register',
-          'Registro de cuenta',
+          'registerUser',
+          'Registro de usuario',
           'Confirmar cuenta',
           $_ENV['HOST'] . "/confirm-account/" . $user->token,
         );
-
-        debugging($response);
 
         if ( $response ) {
           $user->save();
@@ -143,7 +141,6 @@ class AuthController {
         if (!$user->hasVerifiedEmail) return User::setAlert('error', 'Debes verificar tu email antes de reestablecer tu contraseña');
         
         $user->generateToken();
-        $user->save();
 
         $mail = new Email($user->email, $user->name, $user->lastname, $user->token);
         $response = $mail->SendMail(
@@ -152,7 +149,15 @@ class AuthController {
           'Reestablecer contraseña',
           $_ENV['HOST'] . "/reset-password/" . $user->token,
         );
-        User::setAlert('success', 'Hemos enviado las instrucciones a tu Email');
+
+        if ( $response ) {
+          $user->save();
+          
+          User::setAlert('success', 'Hemos enviado las instrucciones a tu Email');
+          return;
+        }
+
+        User::setAlert('error', 'Ha ocurrido un error al generar el token, por favor intenta nuevamente');
       }
     }
 
@@ -163,7 +168,7 @@ class AuthController {
       'alerts' => $alerts,
     ]);
 
-    return;
+    exit;
   }
 
   public static function reserPassword( string $token = '') {
@@ -202,7 +207,7 @@ class AuthController {
       'error' => $error,
     ]);
 
-    return;
+    exit;
   }
 
   public static function profile() {
