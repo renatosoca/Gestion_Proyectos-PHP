@@ -120,15 +120,19 @@ class Model {
   }
   
   public static function PrepareSQL( string $query ): array {
-    $response = self::$database->prepare( $query );
-    $response->execute();
-    
-    $container = [];
-    while ( $register = $response->fetch( self::$database::FETCH_ASSOC ) ) {
-      $container[] = static::createObjects( $register );
+    try {
+      $response = self::$database->prepare( $query );
+      $response->execute();
+      
+      $container = [];
+      while ( $register = $response->fetch( self::$database::FETCH_ASSOC ) ) {
+        $container[] = static::createObjects( $register );
+      }
+      
+      return $container;
+    } catch (\Throwable $th) {
+      return [];
     }
-    
-    return $container;
   }
   public static function createObjects( array $register ): object {
     $object = new static;
@@ -149,54 +153,66 @@ class Model {
     return $this->update();
   }
   public function insert(): array {
-    $attributes = $this->attributes();
-
-    $keys = [];
-    $values = [];
-    foreach ($attributes as $key => $value) {
-      $keys[] = "?";
-      $values[] = !is_bool($value) ? "{$value}" : ($value ? '1' : '0');
+    try {
+      $attributes = $this->attributes();
+  
+      $keys = [];
+      $values = [];
+      foreach ($attributes as $key => $value) {
+        $keys[] = "?";
+        $values[] = !is_bool($value) ? "{$value}" : ($value ? '1' : '0');
+      }
+      
+      $query = "INSERT INTO ". static::$table . "( ";
+      $query .= join(", ", array_keys( $attributes ));
+      $query .= " ) VALUES ( ";
+      $query .= join(', ', $keys);
+      $query .= " )";
+  
+      $response = self::$database->prepare( $query );
+      $result = $response->execute( $values );
+  
+      return [ 'result'=> $result, 'id' => self::$database->lastInsertId() ];
+    } catch (\Throwable $th) {
+      return ['result' => false, 'id' => null];
     }
-    
-    $query = "INSERT INTO ". static::$table . "( ";
-    $query .= join(", ", array_keys( $attributes ));
-    $query .= " ) VALUES ( ";
-    $query .= join(', ', $keys);
-    $query .= " )";
-
-    $response = self::$database->prepare( $query );
-    $result = $response->execute( $values );
-
-    return [ 'result'=> $result, 'id' => self::$database->lastInsertId() ];
   }
   public function update(): bool {
-    $attributes = $this->attributes();
-    
-    $keys = [];
-    $values = [];
-    foreach ($attributes as $key => $value) {
-      $keys[] = "{$key} = ?";
-      $values[] = !is_bool($value) ? "{$value}" : ($value ? '1' : '0');
+    try {
+      $attributes = $this->attributes();
+      
+      $keys = [];
+      $values = [];
+      foreach ($attributes as $key => $value) {
+        $keys[] = "{$key} = ?";
+        $values[] = !is_bool($value) ? "{$value}" : ($value ? '1' : '0');
+      }
+      
+      $query = 'UPDATE '. static::$table . ' SET ';
+      $query .= join(', ', $keys);
+      $query .= " WHERE id = ". self::$database->quote( $this->id ). " ";
+      $query .= "LIMIT 1";
+      $response = self::$database->prepare( $query );
+      $result = $response->execute( $values );
+  
+      return $result;
+    } catch (\Throwable $th) {
+      return false;
     }
-    
-    $query = 'UPDATE '. static::$table . ' SET ';
-    $query .= join(', ', $keys);
-    $query .= " WHERE id = ". self::$database->quote( $this->id ). " ";
-    $query .= "LIMIT 1";
-    $response = self::$database->prepare( $query );
-    $result = $response->execute( $values );
-
-    return $result;
   }
   public function delete(): bool {
-    $query = "DELETE FROM ". static::$table . " ";
-    $query .= "WHERE id = ". self::$database->quote( $this->id ) . " ";
-    $query .= "LIMIT 1";
-    
-    $response = self::$database->prepare( $query );
-    $result = $response->execute();
-
-    return $result;
+    try {
+      $query = "DELETE FROM ". static::$table . " ";
+      $query .= "WHERE id = ". self::$database->quote( $this->id ) . " ";
+      $query .= "LIMIT 1";
+      
+      $response = self::$database->prepare( $query );
+      $result = $response->execute();
+  
+      return $result;
+    } catch (\Throwable $th) {
+      return false;
+    }
   }
   public function attributes(): array {
     $attributes = [];

@@ -7,7 +7,7 @@ function debugging($variable): void {
   exit;
 }
 
-function sanitize($html): string {
+function sanitize(string $html = ''): string {
   $sanitized = htmlspecialchars($html);
   return $sanitized;
 }

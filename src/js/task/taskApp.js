@@ -6,6 +6,7 @@ import { saveTask } from "./useCases/saveTask";
 
 const layout = document.querySelector("#dashboard");
 const element = document.querySelector("#listado-tareas");
+const filtersTasks = document.querySelectorAll('#filtros input[type="radio"');
 
 const projectId = window.location.href.split("/")[4];
 
@@ -17,7 +18,7 @@ export const taskApp = async () => {
     </div>   
   `;
 
-  await taskStore.reloadPage(projectId);
+  await taskStore.loadNextPage(projectId);
 
   while (element.firstChild) {
     element.removeChild(element.firstChild);
@@ -29,11 +30,21 @@ export const taskApp = async () => {
   renderModal(layout, async (taskObject) => {
     const newTaskObject = {
       ...taskObject,
-      id: "",
       projectId,
-      status: "pending",
     };
     const task = await saveTask(newTaskObject);
-    console.log(task);
+    taskStore.onChangeTask(task);
+
+    renderTasks();
   });
 };
+taskApp();
+
+filtersTasks.forEach((filter) => {
+  filter.addEventListener("click", () => {
+    const status = filter.value;
+    console.log(status);
+    //taskStore.setFilter(status);
+    //renderTasks();
+  });
+});

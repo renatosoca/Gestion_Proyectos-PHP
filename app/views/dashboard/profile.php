@@ -10,7 +10,7 @@
         type="text" 
         name="name" 
         id="name" 
-        value="<?php echo sanitize($user->name); ?>" 
+        value="<?php echo sanitize($user->name ?? ''); ?>" 
         placeholder="Tu bombre"
       >
     </div>
@@ -21,7 +21,7 @@
         type="email" 
         name="email" 
         id="email" 
-        value="<?php echo sanitize($user->email); ?>" 
+        value="<?php echo sanitize($user->email ?? ''); ?>" 
         placeholder="Tu Email"
       >
     </div>

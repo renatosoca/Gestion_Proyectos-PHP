@@ -1,4 +1,6 @@
 import taskStore from "../../store/taskStore";
+import { getTaskById } from "../../useCases/getTaskById";
+import { showModal } from "../renderModal/renderModal";
 
 let list;
 const listStatus = {
@@ -13,12 +15,13 @@ const createListTasks = () => {
   return listTasks;
 };
 
-const taskSelected = (e) => {
+const taskSelected = async (e) => {
   const btnEdit = e.target.closest(".select_task");
   if (!btnEdit) return;
 
-  const idTask = btnEdit.dataset.taskStatus;
-  //const task = taskStore.getTaskById(idTask);
+  const idTask = btnEdit.dataset.idTask;
+
+  showModal(idTask);
 };
 
 const deleteTask = (e) => {
@@ -49,6 +52,10 @@ export const renderTasks = (element) => {
     return;
   }
 
+  while (list.firstChild) {
+    list.removeChild(list.firstChild);
+  }
+
   tasks.forEach((task) => {
     const { id, name, status } = task;
 
@@ -56,10 +63,10 @@ export const renderTasks = (element) => {
     taskElement.classList.add("task");
     taskElement.dataset.idTask = id;
     taskElement.innerHTML = `
-      <p class="task__name">${name}</p>
+      <p class="task__name select_task" data-id-task="${id}">${name}</p>
 
       <div class="task__options">
-        <button class="task__status ${status.toLowerCase()} select_task" data-task-status="${status}">
+        <button class="task__status ${status.toLowerCase()} select_tas" data-task-status="${status}">
           ${listStatus[status]}
         </button>
 

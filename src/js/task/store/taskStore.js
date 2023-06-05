@@ -5,6 +5,10 @@ const state = {
   currentTask: 0,
 };
 
+const getTasks = () => {
+  return state.tasks;
+};
+
 const loadNextPage = async (projectId) => {
   const tasks = await loadTaskByProject(projectId, state.currentTask + 1);
   if (tasks.length === 0) return;

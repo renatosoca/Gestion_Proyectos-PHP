@@ -23,13 +23,12 @@ class TaskController {
 
   public static function getTask( string $id = '') {
     if (session_status() === PHP_SESSION_NONE) session_start();
-
     $id = sanitize($id);
 
     if ($id === '') return json_encode(['error' => 'No existe la tarea']);
     $task = Task::findOne('id', $id);
 
-    if (!$task || $task->user_id !== $_SESSION['userId']) return json_encode(['error' => 'No existe la tarea']);
+    if (!$task) return json_encode(['error' => 'No existe la tarea']);
     
     return $task;
   }

@@ -8,18 +8,18 @@
       <h2>Filtros</h2>
 
       <div class="campo">
-        <label for="todas">Todas</label>
+        <label for="todas">Todos</label>
         <input type="radio" name="filtro" id="todas" value="" checked>
       </div>
 
       <div class="campo">
-        <label for="completas">Completas</label>
-        <input type="radio" name="filtro" id="completas" value="1">
+        <label for="completas">Completados</label>
+        <input type="radio" name="filtro" id="completas" value="completed">
       </div>
 
       <div class="campo">
         <label for="pendiente">Pendientes</label>
-        <input type="radio" name="filtro" id="pendiente" value="0">
+        <input type="radio" name="filtro" id="pendiente" value="pending">
       </div>
     </div>
   </div>

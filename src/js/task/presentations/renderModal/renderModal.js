@@ -10,8 +10,7 @@ export const showModal = async (id) => {
   if (!id) return;
 
   const task = await getTaskById(id);
-  console.log(task);
-  //setFormValues(task);
+  setFormValues(task);
 };
 
 export const hiddenModal = () => {
@@ -60,11 +59,10 @@ export const renderModal = (element, callback) => {
 
   const btnClose = modal.querySelector(".modal__close");
 
-  modal.addEventListener("click", (e) => {
-    if (e.target.classList.contains("modal")) {
-      return hiddenModal();
-    }
-  });
+  modal.addEventListener(
+    "click",
+    ({ target }) => target.classList.contains("modal") && hiddenModal()
+  );
   btnClose.addEventListener("click", hiddenModal);
 
   form.addEventListener("submit", async (e) => {
@@ -78,5 +76,6 @@ export const renderModal = (element, callback) => {
     }
 
     await callback(taskObject);
+    hiddenModal();
   });
 };
