@@ -14,7 +14,7 @@ class ProjectController {
     $projects = Project::findAll('user_id', $_SESSION['userId']);
 
     Router::render('projects/index', 'ProjectLayout', [
-      'title' => 'Inicio',
+      'title' => 'Tus Proyectos',
       'projects' => $projects,
       'name' => explode( ' ', $_SESSION['name'])[0] ?? '',
       'lastname' => explode( ' ', $_SESSION['lastname'])[0] ?? '',
