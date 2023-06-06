@@ -25,7 +25,7 @@
     transition: background-color 300ms ease;
 
     &:hover,
-    &.activo {
+    &.active {
       background-color: v.$blue;
     }
     &--icon {
@@ -33,5 +33,17 @@
       height: 2rem;
       margin-right: 1rem;
     }
+    &-logout {
+      color: v.$blanco;
+      transition: background-color 300ms ease;
+
+      &:hover {
+        background-color: v.$red;
+      }
+    }
+  }
+
+  &__menu {
+    margin-top: 1rem;
   }
 }
