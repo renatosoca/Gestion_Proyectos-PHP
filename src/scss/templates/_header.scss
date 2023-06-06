@@ -1,0 +1,70 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.header {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+  .title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    &__menu {
+      width: 3.2rem;
+      height: 3.2rem;
+      padding: 0.5rem;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+
+      &:hover {
+        background-color: v.$gray;
+      }
+    }
+    &__name {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin: 0;
+      &--icon {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+  }
+  &__right {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+  .user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &__name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0;
+    }
+    &__img {
+      width: 4rem;
+      height: 4rem;
+      padding: 0.7rem;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+
+      &:hover {
+        background-color: v.$gray;
+      }
+    }
+  }
+}

@@ -15,14 +15,11 @@
   <div class="layout__project">
     <?php  include_once __DIR__.'/../template/header.php'; ?>
 
-    <main class="layout__container" id="dashboard">
+    <main class="layout__project--container" id="dashboard">
       <?php include_once __DIR__.'/../template/sidebar.php'; ?>
 
-      <div class="layout__main">
-        <div class="layout__container">
-          <h2 class="nombre-pagina"><?php echo $title; ?></h2>
-          <?php echo $content; ?>
-        </div>
+      <div class="layout__project--main project">
+        <?php echo $content; ?>
       </div>
     </main>
   </div>

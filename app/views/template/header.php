@@ -1,4 +1,4 @@
-<header class="layout__header header">
+<header class="layout__project--header header">
   <div class="header__container">
     <div class="header__title title">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="title__menu">

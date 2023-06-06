@@ -13,7 +13,7 @@ class ProjectController {
 
     $projects = Project::findAll('user_id', $_SESSION['userId']);
 
-    Router::render('dashboard/index', 'ProjectLayout', [
+    Router::render('projects/index', 'ProjectLayout', [
       'title' => 'Inicio',
       'projects' => $projects,
       'name' => explode( ' ', $_SESSION['name'])[0] ?? '',
@@ -35,7 +35,7 @@ class ProjectController {
 
     if ($projectExist->user_id !== $_SESSION['userId']) return Router::redirect('/dashboard');
 
-    Router::render('dashboard/project', 'ProjectLayout', [
+    Router::render('projects/project', 'ProjectLayout', [
       'title' => $projectExist->name,
       'name' => $_SESSION['name'] ?? '',
     ]);
@@ -63,7 +63,7 @@ class ProjectController {
       }
     }
 
-    Router::render('dashboard/createProject', 'ProjectLayout', [
+    Router::render('projects/createProject', 'ProjectLayout', [
       'title' => 'Crear Proyecto',
       'alerts' => $alerts,
       'name' => $_SESSION['name'] ?? '',
