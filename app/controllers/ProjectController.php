@@ -37,7 +37,8 @@ class ProjectController {
 
     Router::render('projects/project', 'ProjectLayout', [
       'title' => $projectExist->name,
-      'name' => $_SESSION['name'] ?? '',
+      'name' => explode( ' ', $_SESSION['name'])[0] ?? '',
+      'lastname' => explode( ' ', $_SESSION['lastname'])[0] ?? '',
     ]);
 
     exit;
@@ -66,7 +67,8 @@ class ProjectController {
     Router::render('projects/createProject', 'ProjectLayout', [
       'title' => 'Crear Proyecto',
       'alerts' => $alerts,
-      'name' => $_SESSION['name'] ?? '',
+      'name' => explode( ' ', $_SESSION['name'])[0] ?? '',
+      'lastname' => explode( ' ', $_SESSION['lastname'])[0] ?? '',
     ]);
 
     exit;

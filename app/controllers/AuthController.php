@@ -240,9 +240,10 @@ class AuthController {
 
     $alerts = User::getAlerts();
 
-    Router::render('dashboard/profile', 'ProjectLayout', [
+    Router::render('projects/profile', 'ProjectLayout', [
       'title' => 'Perfil',
-      'name' => $_SESSION['name'] ?? '',
+      'name' => explode( ' ', $_SESSION['name'])[0] ?? '',
+      'lastname' => explode( ' ', $_SESSION['lastname'])[0] ?? '',
       'alerts' => $alerts,
       'user' => $user
     ]);
@@ -275,9 +276,10 @@ class AuthController {
 
     $alertas = User::getAlerts();
     
-    Router::render('dashboard/changePassword', 'ProjectLayout', [
+    Router::render('projects/changePassword', 'ProjectLayout', [
       'title' => 'Cambiar Contraseña',
-      'name' => $_SESSION['name'] ?? '',
+      'name' => explode( ' ', $_SESSION['name'])[0] ?? '',
+      'lastname' => explode( ' ', $_SESSION['lastname'])[0] ?? '',
       'alerts' => $alertas,
       'user' => $user
     ]);
