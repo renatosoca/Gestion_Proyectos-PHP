@@ -1,5 +1,5 @@
 <div class="container login">
-  <h1 class="title">Tasks</h1>
+  <h1 class="title">Projetify</h1>
   <p class="tagline">Administra tus proyectos</p>
 
   <div class="container-sm">

@@ -14,10 +14,10 @@ class ProjectController {
     $projects = Project::findAll('user_id', $_SESSION['userId']);
 
     Router::render('dashboard/index', 'ProjectLayout', [
-      'title' => 'Dashboard',
+      'title' => 'Inicio',
       'projects' => $projects,
-      'name' => $_SESSION['name'] ?? '',
-      'lastname' => $_SESSION['lastname'] ?? '',
+      'name' => explode( ' ', $_SESSION['name'])[0] ?? '',
+      'lastname' => explode( ' ', $_SESSION['lastname'])[0] ?? '',
     ]);
 
     exit;

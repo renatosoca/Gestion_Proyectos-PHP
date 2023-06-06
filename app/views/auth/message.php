@@ -1,5 +1,5 @@
 <div class="container message">
-  <h1 class="title">Tasks</h1>
+  <h1 class="title">Projetify</h1>
   <p class="tagline">Crea y administra tus proyectos</p>
 
   <div class="container-sm">

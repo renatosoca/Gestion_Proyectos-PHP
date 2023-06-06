@@ -1,5 +1,5 @@
 <div class="contenedor reset-password">
-  <h1 class="title">UpTask</h1>
+  <h1 class="title">Projetify</h1>
   <p class="tagline">Crea y administra tus proyectos</p>
 
   <div class="contenedor-sm">

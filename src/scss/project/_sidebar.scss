@@ -1,0 +1,37 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.sidebar {
+  background-color: inherit;
+  max-width: 22rem;
+  width: 100%;
+  padding: 0 1rem;
+
+  &__nav {
+    border-bottom: 0.1rem solid v.$lightGray;
+    padding-bottom: 0.5em;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: v.$blanco;
+    font-weight: 500;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    padding: 1.2rem 1.8rem;
+    border-radius: 1rem;
+    transition: background-color 300ms ease;
+
+    &:hover,
+    &.activo {
+      background-color: v.$blue;
+    }
+    &--icon {
+      width: 2rem;
+      height: 2rem;
+      margin-right: 1rem;
+    }
+  }
+}

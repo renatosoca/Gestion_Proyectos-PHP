@@ -1,84 +1,83 @@
-@use 'base/variables' as v;
+@use "base/variables" as v;
 
 @media (prefers-color-scheme: dark) {
-    body {
-        background-color: v.$grisOscuro;
+  body {
+    background-color: v.$grisOscuro;
+  }
+
+  .tagline,
+  .form__field,
+  .login .links a,
+  .register .links a,
+  .forgot-password .links a {
+    color: v.$white;
+  }
+
+  .descripcion-pagina {
+    color: v.$white;
+  }
+
+  .formulario input {
+    background-color: lighten(v.$grisOscuro, 5%);
+  }
+
+  .dashboard {
+    background-color: v.$darkGray;
+
+    .nombre-pagina {
+      color: v.$white;
     }
+  }
 
-    .tagline, 
-    .campo,
-    .login .acciones a,
-    .crear .acciones a,
-    .olvide .acciones a  {
-        color: v.$blanco;
+  .sidebar {
+    background-color: v.$darkGray;
+  }
+
+  .barra {
+    background-color: darken(v.$grisOscuro, 5%);
+
+    p {
+      color: v.$white;
+
+      span {
+        color: v.$white;
+      }
     }
+  }
 
-    .descripcion-pagina{
-        color: v.$blanco;
+  .listado-proyectos .proyecto {
+    background-color: lighten(v.$grisOscuro, 20%);
+
+    &:hover {
+      background-color: lighten(v.$grisOscuro, 13%);
     }
+  }
 
-    .formulario input {
-        background-color: lighten(v.$grisOscuro, 5%);
+  .filtros {
+    background-color: lighten(v.$grisOscuro, 10%);
+
+    .filtros-inputs {
+      h2,
+      label {
+        color: v.$white;
+      }
     }
+  }
 
-    .dashboard {
-        background-color: v.$grisOscuro;
+  .listado-tareas .tarea {
+    background-color: lighten(v.$grisOscuro, 10%);
+    border: none;
 
-        .nombre-pagina {
-            color: v.$blanco;
-        }
+    p {
+      color: v.$grisClaro;
     }
+  }
 
-    .sidebar {
-        background-color: darken(v.$grisOscuro, 10%);
+  .modal .formulario.animar {
+    background-color: lighten(v.$grisOscuro, 10%);
+
+    legend {
+      color: v.$white;
     }
-
-    .barra {
-        background-color: darken(v.$grisOscuro, 5%);
-
-        p {
-            color: v.$blanco;
-
-            span {
-                color: v.$blanco;
-            }
-        }
-    }
-
-    .listado-proyectos .proyecto {
-        background-color: lighten(v.$grisOscuro, 20%);
-
-        &:hover {
-            background-color: lighten(v.$grisOscuro, 13%);
-        }
-    }
-
-    .filtros {
-        background-color: lighten(v.$grisOscuro, 10%);
-
-        .filtros-inputs {
-            
-            h2,
-            label {
-            color: v.$blanco;
-            }
-        }
-    }
-
-    .listado-tareas .tarea{
-        background-color: lighten(v.$grisOscuro, 10%);
-        border: none;
-
-        p {
-            color: v.$grisClaro;
-        }
-    }
-
-    .modal .formulario.animar {
-        background-color: lighten(v.$grisOscuro, 10%);
-
-        legend {
-            color: v.$blanco;
-        }
-    }
+  }
 }

@@ -1,5 +1,5 @@
 <div class="container forgot-password">
-  <h1 class="title">Tasks</h1>
+  <h1 class="title">Projetify</h1>
   <p class="tagline">Recupera el acceso a tu cuenta</p>
 
   <div class="container-sm">
