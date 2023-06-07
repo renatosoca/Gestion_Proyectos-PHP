@@ -13,18 +13,14 @@
     color: v.$white;
   }
 
-  .descripcion-pagina {
-    color: v.$white;
-  }
-
-  .formulario input {
+  .form input {
     background-color: lighten(v.$grisOscuro, 5%);
   }
 
-  .dashboard {
+  .layout {
     background-color: v.$darkGray;
 
-    .nombre-pagina {
+    &__title {
       color: v.$white;
     }
   }
@@ -33,7 +29,7 @@
     background-color: v.$darkGray;
   }
 
-  .barra {
+  .header {
     background-color: darken(v.$grisOscuro, 5%);
 
     p {
@@ -45,7 +41,7 @@
     }
   }
 
-  .listado-proyectos .proyecto {
+  .project__list .project {
     background-color: lighten(v.$grisOscuro, 20%);
 
     &:hover {
@@ -53,10 +49,10 @@
     }
   }
 
-  .filtros {
+  .filters {
     background-color: lighten(v.$grisOscuro, 10%);
 
-    .filtros-inputs {
+    .filters__value {
       h2,
       label {
         color: v.$white;
@@ -73,7 +69,7 @@
     }
   }
 
-  .modal .formulario.animar {
+  .modal .form {
     background-color: lighten(v.$grisOscuro, 10%);
 
     legend {

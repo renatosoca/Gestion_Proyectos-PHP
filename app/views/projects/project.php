@@ -1,36 +1,58 @@
-<div class="contenedor-sm">
-  <div class="contenedor-nueva-tarea">
-    <button type="button" class="agregar-tarea" id="new-task">&#43; Nueva Tarea</button>
+<div class="projects__container project">
+  <div class="project__container">
+    <div class="project__header">
+      <h2 class="project__title">
+        Proyecto: <span class="project__title--span"><?php echo $title ?? '' ?></span>
+      </h2>
+
+      <button 
+      type="button" 
+      class="project__btn project__btn--addTask" 
+      id="new-task"
+      >
+        Agregar nueva tarea
+      </button>
+    </div>  <!-- END PROJECT HEADER -->
+
+    <div class="project__filters filters" id="filters">
+      <ul class="filters__list">
+        <li class="filters__item">
+          <button
+            type="button"
+            class="filters__btn filters__btn--active"
+            id="all"
+          >
+            Todos
+          </button>
+        </li>
+        <li class="filters__item">
+          <button
+            type="button"
+            class="filters__btn"
+            id="completed"
+          >
+            Completados
+          </button>
+        </li>
+        <li class="filters__item">
+          <button
+            type="button"
+            class="filters__btn"
+            id="pending"
+          >
+            Pendientes
+          </button>
+        </li>
+      </ul>
+    </div>  <!-- END PROJECT FILTERS -->
+  
+    <div class="project__tasks tasks" id="list-tasks">
+    </div>  <!-- END PROJECT TASKS -->
   </div>
-
-  <div class="filtros" id="filtros">
-    <div class="filtros-inputs">
-      <h2>Filtros</h2>
-
-      <div class="campo">
-        <label for="todas">Todos</label>
-        <input type="radio" name="filtro" id="todas" value="all" checked>
-      </div>
-
-      <div class="campo">
-        <label for="completas">Completados</label>
-        <input type="radio" name="filtro" id="completas" value="completed">
-      </div>
-
-      <div class="campo">
-        <label for="pendiente">Pendientes</label>
-        <input type="radio" name="filtro" id="pendiente" value="pending">
-      </div>
-    </div>
-  </div>
-
-  <ul id="listado-tareas" class="listado-tareas">
-  </ul>
 </div>
 
 <?php 
   $script = "
-  <script src='//cdn.jsdelivr.net/npm/sweetalert2@11'></script>
   <script src='/build/js/main.js' ></script>
   "; 
 ?>

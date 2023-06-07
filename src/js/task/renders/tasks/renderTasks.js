@@ -12,7 +12,7 @@ const listStatus = {
 
 const createListTasks = () => {
   const listTasks = document.createElement("ul");
-  listTasks.classList.add("list__tasks");
+  listTasks.classList.add("tasks__list");
 
   return listTasks;
 };
@@ -83,7 +83,7 @@ export const renderTasks = (element, projectId) => {
   if (tasks.length === 0) {
     const taskElement = document.createElement("li");
     taskElement.textContent = "No hay tareas";
-    taskElement.classList.add("task__empty");
+    taskElement.classList.add("tasks__empty");
     list.appendChild(taskElement);
     return;
   }
@@ -92,17 +92,17 @@ export const renderTasks = (element, projectId) => {
     const { id, name, status } = task;
 
     const taskElement = document.createElement("li");
-    taskElement.classList.add("task");
+    taskElement.classList.add("tasks__item");
     taskElement.dataset.idTask = id;
     taskElement.innerHTML = `
-      <p class="task__name select_task" data-id-task="${id}">${name}</p>
+      <p class="tasks__name select_task" data-id-task="${id}">${name}</p>
 
-      <div class="task__options">
-        <button class="task__status ${status.toLowerCase()} select_status" data-task-status="${status}" data-id="${id}" >
+      <div class="tasks__options">
+        <button class="tasks__status ${status.toLowerCase()} select_status" data-task-status="${status}" data-id="${id}" >
           ${listStatus[status]}
         </button>
 
-        <button class="task__delete delete_task" data-id-task="${id}">
+        <button class="tasks__delete delete_task" data-id-task="${id}">
           Eliminar
         </button>
       </div>

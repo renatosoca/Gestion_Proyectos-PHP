@@ -18,7 +18,7 @@
     <main class="layout__project--container" id="dashboard">
       <?php include_once __DIR__.'/../template/sidebar.php'; ?>
 
-      <div class="layout__project--main project">
+      <div class="layout__project--main projects">
         <?php echo $content; ?>
       </div>
     </main>

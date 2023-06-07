@@ -1,0 +1,65 @@
+@use "base/variables" as v;
+@use "base/mixins" as m;
+
+.project {
+  &__container {
+    width: 100%;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+  &__title {
+    color: v.$lightGray;
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin: 0%;
+    text-transform: capitalize;
+
+    &--span {
+      color: v.$white;
+      font-weight: 700;
+    }
+  }
+  &__btn {
+    @include m.button(v.$blue, v.$white);
+
+    &--addTask {
+      width: auto;
+      padding-inline: 1.5rem;
+      margin: 0%;
+    }
+  }
+  &__filters {
+    .filters {
+      &__list {
+        all: unset;
+        list-style: none;
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        background-color: v.$dark;
+        border-radius: 0.8rem;
+        padding: 1.5rem 2rem;
+      }
+      &__btn {
+        background-color: inherit;
+        color: v.$lightGray;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+          color: v.$white;
+        }
+        &--active {
+          color: v.$white;
+          border-bottom: 0.1rem solid v.$white;
+        }
+      }
+    }
+  }
+}

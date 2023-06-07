@@ -1,6 +1,6 @@
 # Proyecto de Gestión de Proyectos
 
-![Proyecto Projetify](./public/build/images/image-projetify.webp)
+![Proyecto Projetify](./public/build/images/projetify-home.webp)
 
 ## Iniciar el proyecto
 

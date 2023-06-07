@@ -5,8 +5,10 @@ import { renderTasks } from "./renders/tasks/renderTasks";
 import { saveTask } from "./useCases/saveTask";
 
 const layout = document.querySelector("#dashboard");
-const element = document.querySelector("#listado-tareas");
-const filtersTasks = document.querySelectorAll('#filtros input[type="radio"');
+const element = document.querySelector("#list-tasks");
+const filtersTasks = document.querySelectorAll(
+  '#filters button[type="button"]'
+);
 
 const projectId = window.location.href.split("/")[4];
 
@@ -40,9 +42,13 @@ export const taskApp = async () => {
 
   filtersTasks.forEach((filter) => {
     filter.addEventListener("click", () => {
-      const status = filter.value;
+      filtersTasks.forEach((filter) =>
+        filter.classList.remove("filters__btn--active")
+      );
+      const status = filter.id;
+      filter.classList.add("filters__btn--active");
 
-      switch (filter.value) {
+      switch (status) {
         case "all":
           taskStore.setFilter(Filters.all);
           break;

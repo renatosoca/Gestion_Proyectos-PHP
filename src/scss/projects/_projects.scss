@@ -1,7 +1,7 @@
 @use "base/variables" as v;
 @use "base/mixins" as m;
 
-.project {
+.projects {
   flex: 1;
   overflow-y: auto;
 
@@ -47,9 +47,3 @@
     }
   }
 }
-
-/* .formulario {
-  input:not([type="submit"]) {
-    background-color: v.$blanco;
-  }
-} */
