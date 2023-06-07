@@ -1,5 +1,5 @@
 
-<div class="project__container createProject">
+<div class="projects__container createProject">
   <div class="createProject__container">
     <h2 class="createProject__title">Crear un proyecto</h2>
     <?php include_once __DIR__.'/../template/alerts.php'; ?>

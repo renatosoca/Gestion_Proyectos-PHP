@@ -1,4 +1,4 @@
-<div class="project__container changePassword">
+<div class="projects__container changePassword">
   <div class="changePassword__container">
     <?php include_once __DIR__.'/../template/alerts.php'; ?>
 

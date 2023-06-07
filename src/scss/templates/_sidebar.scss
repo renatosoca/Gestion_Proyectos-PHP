@@ -2,10 +2,25 @@
 @use "base/mixins" as m;
 
 .sidebar {
+  position: absolute;
+  left: -100%;
   background-color: inherit;
   max-width: 22rem;
   width: 100%;
   padding: 0 1rem;
+  transition: left position 300ms ease;
+  @include m.lg {
+    position: relative;
+    left: 0;
+  }
+  &--active {
+    position: relative;
+    left: 0;
+    @include m.lg {
+      position: absolute;
+      left: -100%;
+    }
+  }
 
   &__nav {
     border-bottom: 0.1rem solid v.$lightGray;

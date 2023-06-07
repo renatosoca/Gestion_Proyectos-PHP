@@ -1,52 +1,19 @@
 @use "base/variables" as v;
 
 /** Media Queries **/
-
-@mixin telefono {
-  @media (min-width: v.$telefono) {
-    @content;
-  }
-}
-@mixin tablet {
-  @media (min-width: v.$tablet) {
-    @content;
-  }
-}
-@mixin desktop {
-  @media (min-width: v.$desktop) {
-    @content;
-  }
-}
-
-@mixin boton($bgColor, $colorTexto) {
-  background-color: $bgColor;
-  padding: 1.5rem 4rem;
-  color: $colorTexto;
-  font-size: 1.6rem;
-  display: inline-block;
-  font-weight: 700;
-  border: none;
-  transition-property: background-color;
-  transition-duration: 0.3s;
-  text-align: center;
-  display: block;
-  width: 100%;
-  @include tablet {
-    width: auto;
-  }
-  &:hover {
-    background-color: darken($bgColor, 10%);
-    cursor: pointer;
-  }
-}
-
 @mixin sm {
-  @media (max-width: v.$sm) {
+  @media (min-width: v.$sm) {
     @content;
   }
 }
 @mixin md {
-  @media (max-width: v.$md) {
+  @media (min-width: v.$md) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: v.$lg) {
     @content;
   }
 }

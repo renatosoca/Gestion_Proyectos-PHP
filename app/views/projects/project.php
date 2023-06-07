@@ -1,4 +1,4 @@
-<div class="projects__container project">
+<div class="projects__container project" id="page-project">
   <div class="project__container">
     <div class="project__header">
       <h2 class="project__title">
@@ -53,6 +53,5 @@
 
 <?php 
   $script = "
-  <script src='/build/js/main.js' ></script>
   "; 
 ?>

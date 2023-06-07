@@ -13,7 +13,7 @@ docker-compose up -d
 luego se debe importar las tablas a la base de datos con el siguiente comando:
 
 ```bash
-docker exec -i mysql mysql -u root -p123456 < ./database.sql
+docker exec -i mysql mysql -u root -pdevelopment < ./database/projetify.sql
 ```
 
 siguiente, se debe declarar las variables de entorno en el archivo .env, para esto se debe copiar el archivo .env.example y renombrarlo a .env, luego se debe modificar las siguientes variables:
@@ -29,7 +29,7 @@ EMAIL_HOST = aquí: servicio de prueba de mailtrap u otro servicio de correo
 EMAIL_PORT = aquí: servicio de prueba de mailtrap u otro servicio de correo
 EMAIL_USER = aquí: servicio de prueba de mailtrap u otro servicio de correo
 EMAIL_PASS = aquí: servicio de prueba de mailtrap u otro servicio de correo
-EMAIL_SECURE = aquí: servicio de prueba de mailtrap u otro servicio de correo
+EMAIL_SECURE = true o false
 ```
 
 una ves hecho lo anterior, se debe instalar las dependencias del proyecto con el siguiente comando:

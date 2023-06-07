@@ -1,4 +1,4 @@
-<div class="project__container profile">
+<div class="projects__container profile">
   <div class="profile__container">
     <?php include_once __DIR__.'/../template/alerts.php'; ?>
   

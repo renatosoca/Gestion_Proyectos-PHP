@@ -7,7 +7,10 @@
 
   &__container {
     min-height: calc(100vh - 6rem);
-    padding: 0 2rem 0 4.5rem;
+    padding: 0 2rem;
+    @include m.lg {
+      padding: 0 4.5rem;
+    }
   }
   &__title {
     font-size: 2.5rem;
@@ -20,8 +23,17 @@
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 2rem;
+    @include m.md {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include m.sm {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include m.lg {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
   &__link {
     background-color: lighten(v.$indigo, 5%);

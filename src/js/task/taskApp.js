@@ -4,6 +4,8 @@ import { renderModal } from "./renders/modals/renderModal";
 import { renderTasks } from "./renders/tasks/renderTasks";
 import { saveTask } from "./useCases/saveTask";
 
+const pageProject = document.querySelector("#page-project");
+
 const layout = document.querySelector("#dashboard");
 const element = document.querySelector("#list-tasks");
 const filtersTasks = document.querySelectorAll(
@@ -13,6 +15,8 @@ const filtersTasks = document.querySelectorAll(
 const projectId = window.location.href.split("/")[4];
 
 export const taskApp = async () => {
+  if (!pageProject) return;
+
   element.innerHTML = `
     <div class="loading">
       <span class="loading__title" >Cargando</span>

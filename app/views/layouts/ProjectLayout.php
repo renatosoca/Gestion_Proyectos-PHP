@@ -25,5 +25,7 @@
   </div>
 
   <?php echo $script ?? ''; ?>
+  
+  <script src='/build/js/main.js' ></script>
 </body>
 </html>
