@@ -2,7 +2,10 @@
   <div class="profile__container">
     <?php include_once __DIR__.'/../template/alerts.php'; ?>
   
-    <a href="/user/change-password" class="btn">Cambiar Contraseña</a>
+    <div class="profile__header">
+      <h2 class="profile__title" ><?php echo $title ?? '' ?></h2>
+      <a href="/user/change-password" class="profile__link">Cambiar Contraseña</a>
+    </div>
   
     <form action="/user/profile" class="form" method="POST">
       <div class="form__field">
