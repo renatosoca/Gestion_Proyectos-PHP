@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Router;
+use App\Cores\Router;
 use App\Models\Project;
 
 class ProjectController {

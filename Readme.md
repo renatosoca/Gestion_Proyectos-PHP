@@ -10,10 +10,10 @@ Primero se debe crear el contenedor con el siguiente comando:
 docker-compose up -d
 ```
 
-luego se debe importar las tablas a la base de datos con el siguiente comando:
+luego se debe de importar las tablas de la base de datos ubicado en la carpeta database:
 
 ```bash
-docker exec -i mysql mysql -u root -pdevelopment < ./database/projetify.sql
+./database/projetify.sql
 ```
 
 siguiente, se debe declarar las variables de entorno en el archivo .env, para esto se debe copiar el archivo .env.example y renombrarlo a .env, luego se debe modificar las siguientes variables:
